@@ -13,14 +13,25 @@ final class AdminAJAXEndpoints
 {
     use Singleton;
 
+    const _WPNONCE = 'am-api-plugin-admin-ajax-endpoints';
+
     protected function init()
     {
+        if ( ! ( defined('DOING_AJAX') && DOING_AJAX ) ) {
+            return;
+        }
+
         add_action( 'wp_ajax_am_get_challenge_data', [ $this, 'getChallengeData' ] );
         add_action( 'wp_ajax_nopriv_am_get_challenge_data', [ $this, 'getChallengeData' ] );
     }
 
     protected function validateAJAXRequest(): bool
     {
+        $nonce = $_POST['_wpnonce'];
+        if ( ! wp_verify_nonce( $nonce, self::_WPNONCE ) ) {
+            return false;
+        }
+        
         return true;
     }
 
