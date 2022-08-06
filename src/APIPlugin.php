@@ -34,17 +34,17 @@ final class APIPlugin
     {
         // Define settings
         $this->pluginVersion = defined('JNFDEV_APIPLUGIN_VERSION') ? JNFDEV_APIPLUGIN_VERSION : '1.0.0';
-        $this->textdomain    = defined('JNFDEV_APIPLUGIN_VERSION') ? JNFDEV_APIPLUGIN_VERSION : 'jnfdev-apiplugin';
+        $this->rootPath      = defined('JNFDEV_APIPLUGIN_ROOT_PATH') ? JNFDEV_APIPLUGIN_ROOT_PATH : dirname( dirname( __DIR__ ) );
+        $this->textdomain    = defined('JNFDEV_APIPLUGIN_TEXTDOMAIN') ? JNFDEV_APIPLUGIN_TEXTDOMAIN : 'jnfdev-apiplugin';
         
         add_action( 'init', [ $this, 'pluginInit' ] );
     }
 
     protected function pluginSetup()
     {
-        /**
-         * Define global stuff, such as registering custom post-types, 
-         * loading the plugin's textdomain, or even registering global hooks.
-         */
+        // Load plugin textdomain.
+        $pluginLangPath = $this->rootPath . '/languages/';
+        load_plugin_textdomain( $this->textdomain, false, $pluginLangPath );
     }
 
     protected function admin()
