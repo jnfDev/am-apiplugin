@@ -52,7 +52,7 @@ final class APIBlock
                     'type' => 'string',
                 ],
                 'hiddenColumns' => [
-                    'type'    => 'object',
+                    'type'    => 'array',
                 ],
             ]
         ] );

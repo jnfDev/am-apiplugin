@@ -26,6 +26,7 @@ export const Block = ({ attributes, setAttributes }) => {
                             setHiddenColumns={setHiddenColumns} 
                         />
                     </InspectorControls> 
+
                     <Table data={data} hiddenColumns={hiddenColumns} />
                 </>
             )
@@ -53,8 +54,8 @@ export const Block = ({ attributes, setAttributes }) => {
     }
 
     return (
-        <div className='Block'>
+        <>
             {renderBlock()}
-        </div>
+        </>
     );
 }
