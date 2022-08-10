@@ -2,6 +2,7 @@
 
 namespace Am\APIPlugin;
 
+use Am\APIPlugin\APIBlock;
 use Am\APIPlugin\Admin\AdminAJAXEndpoints;
 
 defined( 'ABSPATH' ) || exit;
@@ -20,6 +21,16 @@ final class APIPlugin
      */
     public $pluginVersion;
 
+    /**
+     * @var string Plguin's root path
+     */
+    public $rootPath;
+
+    /**
+     * @var string Plugin's root URL
+     */
+    public $rootURL;
+
     public function pluginInit() {
         $this->pluginSetup();
     
@@ -35,6 +46,7 @@ final class APIPlugin
         // Define settings
         $this->pluginVersion = defined('JNFDEV_APIPLUGIN_VERSION') ? JNFDEV_APIPLUGIN_VERSION : '1.0.0';
         $this->rootPath      = defined('JNFDEV_APIPLUGIN_ROOT_PATH') ? JNFDEV_APIPLUGIN_ROOT_PATH : dirname( dirname( __DIR__ ) );
+        $this->rootURL       = defined('JNFDEV_APIPLUGIN_ROOT_URL') ? JNFDEV_APIPLUGIN_ROOT_URL : plugin_dir_url( dirname( dirname( __DIR__ ) ) );
         $this->textdomain    = defined('JNFDEV_APIPLUGIN_TEXTDOMAIN') ? JNFDEV_APIPLUGIN_TEXTDOMAIN : 'jnfdev-apiplugin';
         
         add_action( 'init', [ $this, 'pluginInit' ] );
@@ -45,6 +57,9 @@ final class APIPlugin
         // Load plugin textdomain.
         $pluginLangPath = $this->rootPath . '/languages/';
         load_plugin_textdomain( $this->textdomain, false, $pluginLangPath );
+
+        // Load custom block
+        APIBlock::run();
     }
 
     protected function admin()

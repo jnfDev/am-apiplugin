@@ -1,0 +1,15 @@
+{
+  "name": "am-apiplugin",
+  "version": "1.0.0",
+  "description": "This plugin is an Admission test for Awesome Motive.",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "author": "jnfdev",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/scripts": "23.6.0"
+  }
+}

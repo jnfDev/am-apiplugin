@@ -16,6 +16,7 @@ require_once __DIR__.'/vendor/autoload.php';
  */
 define( 'JNFDEV_APIPLUGIN_VERSION', '1.0.0' );
 define( 'JNFDEV_APIPLUGIN_ROOT_PATH', __DIR__ );
+define( 'JNFDEV_APIPLUGIN_ROOT_URL', plugin_dir_url( __FILE__ ) );
 define( 'JNFDEV_APIPLUGIN_TEXTDOMAIN', 'jnfdev-apiplugin' );
 
 APIPlugin::run();

@@ -3,6 +3,7 @@
 namespace Am\APIPlugin\Admin;
 
 use Exception;
+use Am\APIPlugin\APIPlugin;
 use Am\APIPlugin\Models\APIRequest;
 use Am\APIPlugin\Singleton;
 use Am\APIPlugin\Exceptions\RequestFailedException;
@@ -12,8 +13,6 @@ defined( 'ABSPATH' ) || exit;
 final class AdminAJAXEndpoints
 {
     use Singleton;
-
-    const _WPNONCE = 'am-api-plugin-admin-ajax-endpoints';
 
     protected function init()
     {
@@ -27,8 +26,9 @@ final class AdminAJAXEndpoints
 
     protected function validateAJAXRequest(): bool
     {
-        $nonce = $_POST['_wpnonce'];
-        if ( ! wp_verify_nonce( $nonce, self::_WPNONCE ) ) {
+        $nonce      = $_POST['wpnonce'];
+        $textdomain = APIPlugin::getInstance()->textdomain;
+        if ( ! wp_verify_nonce( $nonce, "_wpnonce_{$textdomain}"  ) ) {
             return false;
         }
         
@@ -47,15 +47,11 @@ final class AdminAJAXEndpoints
             $apiRequest = new APIRequest();
             $apiData    = $apiRequest->getChallengeById( $resourceId );
 
-            wp_send_json_success([
-                'error' => false,
-                'data' => $apiData
-            ]);
+            wp_send_json_success($apiData);
 
         } catch (Exception $e) {
             wp_send_json_error([
-                'error'         => true,
-                'error_message' => $e->getMessage()
+                'errorMessage' => $e->getMessage()
             ]);
         }
     }
