@@ -16,7 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _BlockSettings_BlockSettings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BlockSettings/BlockSettings */ "./src/components/BlockSettings/BlockSettings.js");
+/* harmony import */ var _ColumnsVisibility_ColumnsVisibility__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ColumnsVisibility/ColumnsVisibility */ "./src/components/ColumnsVisibility/ColumnsVisibility.js");
 /* harmony import */ var _Table_Table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Table/Table */ "./src/components/Table/Table.js");
 /* harmony import */ var _Error_Error__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Error/Error */ "./src/components/Error/Error.js");
 /* harmony import */ var _Loading_Loading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Loading/Loading */ "./src/components/Loading/Loading.js");
@@ -44,7 +44,7 @@ const Block = _ref => {
     });
   };
 
-  const render = () => {
+  const renderBlock = () => {
     if (!!error) {
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Error_Error__WEBPACK_IMPORTED_MODULE_4__.Error, {
         error: error
@@ -52,16 +52,25 @@ const Block = _ref => {
     }
 
     if (!!data) {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Table_Table__WEBPACK_IMPORTED_MODULE_3__.Table, {
+      var _data$data;
+
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+        key: "setting"
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ColumnsVisibility_ColumnsVisibility__WEBPACK_IMPORTED_MODULE_2__.ColumnsVisibility, {
+        columns: data === null || data === void 0 ? void 0 : (_data$data = data.data) === null || _data$data === void 0 ? void 0 : _data$data.headers,
+        hiddenColumns: hiddenColumns,
+        setHiddenColumns: setHiddenColumns
+      })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Table_Table__WEBPACK_IMPORTED_MODULE_3__.Table, {
         data: data,
         hiddenColumns: hiddenColumns
-      });
+      }));
     }
 
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Loading_Loading__WEBPACK_IMPORTED_MODULE_5__.Loading, null);
   };
 
   if (!data) {
+    // TODO: useEffect
     jQuery.post(adminVars.url, {
       action: adminVars.action,
       wpnonce: adminVars.nonce
@@ -83,25 +92,20 @@ const Block = _ref => {
     });
   }
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-    key: "setting"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_BlockSettings_BlockSettings__WEBPACK_IMPORTED_MODULE_2__.BlockSettings, {
-    hiddenColumns: hiddenColumns,
-    setHiddenColumns: setHiddenColumns
-  })), render());
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, renderBlock());
 };
 
 /***/ }),
 
-/***/ "./src/components/BlockSettings/BlockSettings.js":
-/*!*******************************************************!*\
-  !*** ./src/components/BlockSettings/BlockSettings.js ***!
-  \*******************************************************/
+/***/ "./src/components/ColumnsVisibility/ColumnsVisibility.js":
+/*!***************************************************************!*\
+  !*** ./src/components/ColumnsVisibility/ColumnsVisibility.js ***!
+  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "BlockSettings": () => (/* binding */ BlockSettings)
+/* harmony export */   "ColumnsVisibility": () => (/* binding */ ColumnsVisibility)
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
@@ -109,91 +113,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const BlockSettings = _ref => {
+const ColumnsVisibility = _ref => {
   let {
-    hiddenColumns,
-    setHiddenColumns
+    columns = [],
+    setHiddenColumns,
+    hiddenColumns = []
   } = _ref;
-
-  const _hiddenColumns = hiddenColumns || {};
-
-  const hideID = _hiddenColumns.id ? true : false;
-  const hideFname = _hiddenColumns.fname ? true : false;
-  const hideLname = _hiddenColumns.lname ? true : false;
-  const hideEmail = _hiddenColumns.email ? true : false;
-  const hideDate = _hiddenColumns.date ? true : false;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "block-settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    label: "Hide ID",
-    help: hideID ? 'Hidden' : 'Visible.',
-    checked: !hideID,
-    onChange: checked => {
-      if (checked) {
-        delete _hiddenColumns.id;
-      } else {
-        _hiddenColumns.id = 'ID';
-      }
+    className: "columns-visibility"
+  }, columns.map((col, index) => {
+    const isHidden = hiddenColumns.includes(`column_${index}`);
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
+      label: `Hide ${col}`,
+      help: isHidden ? 'Hidden' : 'Visible',
+      checked: isHidden,
+      onChange: checked => {
+        if (checked) {
+          setHiddenColumns(hiddenColumns.concat([`column_${index}`]));
+          return;
+        }
 
-      setHiddenColumns({ ..._hiddenColumns
-      });
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    label: "Hide First Name",
-    help: hideFname ? 'Hidden' : 'Visible.',
-    checked: !hideFname,
-    onChange: checked => {
-      if (checked) {
-        delete _hiddenColumns.fname;
-      } else {
-        _hiddenColumns.fname = 'First Name';
+        setHiddenColumns(hiddenColumns.filter(col => col !== `column_${index}`));
       }
-
-      setHiddenColumns({ ..._hiddenColumns
-      });
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    label: "Hide Last Name",
-    help: hideLname ? 'Hidden' : 'Visible',
-    checked: !hideLname,
-    onChange: checked => {
-      if (checked) {
-        delete _hiddenColumns.lname;
-      } else {
-        _hiddenColumns.lname = 'Last Name';
-      }
-
-      setHiddenColumns({ ..._hiddenColumns
-      });
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    label: "Hide Email",
-    help: hideEmail ? 'Hidden' : 'Visible',
-    checked: !hideEmail,
-    onChange: checked => {
-      if (checked) {
-        delete _hiddenColumns.email;
-      } else {
-        _hiddenColumns.email = 'Email';
-      }
-
-      setHiddenColumns({ ..._hiddenColumns
-      });
-    }
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
-    label: "Hide Date",
-    help: hideDate ? 'Hidden' : 'Visible',
-    checked: !hideDate,
-    onChange: checked => {
-      if (checked) {
-        delete _hiddenColumns.date;
-      } else {
-        _hiddenColumns.date = 'Date';
-      }
-
-      setHiddenColumns({ ..._hiddenColumns
-      });
-    }
+    });
   }));
 };
 
@@ -249,40 +191,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Table_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Table.scss */ "./src/components/Table/Table.scss");
 
 
-/*
-    {
-        hiddenColumns: {
-            fname: "First Name"
-        }
-    }
-
-*/
 const Table = _ref => {
   let {
     data,
-    hiddenColumns
+    hiddenColumns = []
   } = _ref;
   const {
     title,
     data: table
   } = data;
-
-  const _hiddenColumns = hiddenColumns || {};
-
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", null, title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, table.headers.filter(col => !Object.values(_hiddenColumns).includes(col)).map(col => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", null, title), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("thead", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, table.headers.filter((col, index) => !hiddenColumns.includes(`column_${index}`)).map(col => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("th", null, col);
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tbody", null, Object.values(table.rows).map(row => {
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, Object.entries(row).filter(_ref2 => {
-      let [key, value] = _ref2;
-      return !Object.keys(_hiddenColumns).includes(key);
-    }).map(_ref3 => {
-      let [key, value] = _ref3;
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, value);
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", null, Object.values(row).filter((col, index) => !hiddenColumns.includes(`column_${index}`)).map(col => {
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", null, col);
     }));
   }))));
 };
+
+/***/ }),
+
+/***/ "./src/components/Table/Table.scss":
+/*!*****************************************!*\
+  !*** ./src/components/Table/Table.scss ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 

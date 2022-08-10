@@ -1,17 +1,16 @@
 import './Table.scss';
 
-export const Table = ({ data, hiddenColumns }) => {
+export const Table = ({ data, hiddenColumns = [] }) => {
     const { title, data: table } = data;
-    const _hiddenColumns = hiddenColumns || {}; 
 
     return (
-        <div>
+        <div className="Table">
             <h4>{title}</h4>
             <table>
                 <thead>
                     <tr>
                         {table.headers
-                        .filter((col) => ! Object.values(_hiddenColumns).includes(col))
+                        .filter((col, index) => ! hiddenColumns.includes(`column_${index}`))
                         .map(
                             (col) => {
                                 return (
@@ -26,13 +25,11 @@ export const Table = ({ data, hiddenColumns }) => {
                     {Object.values(table.rows).map((row) => {
                         return (
                             <tr>
-                                {Object.entries(row)
-                                .filter(([ key, value ]) => ! Object.keys(_hiddenColumns).includes(key))
-                                .map(
-                                    ([ key, value ]) => {
-                                        return <td>{value}</td>
-                                    }
-                                )}
+                                {Object.values(row)
+                                .filter((col, index) => ! hiddenColumns.includes(`column_${index}`))
+                                .map((col) => {
+                                    return <td>{col}</td>
+                                })}
                             </tr>
                         );
                     })}

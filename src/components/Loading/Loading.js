@@ -1,5 +1,5 @@
 export const Loading = () => {
     return (
-        <p>Loading</p>
+        <div className="Loading">Loading</div>
     );
 };
