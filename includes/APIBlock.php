@@ -48,9 +48,6 @@ final class APIBlock
                 'data' => [
                     'type' => 'object',
                 ],
-                'error' => [
-                    'type' => 'string',
-                ],
                 'hiddenColumns' => [
                     'type'    => 'array',
                 ],

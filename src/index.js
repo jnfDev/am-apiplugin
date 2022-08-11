@@ -14,6 +14,11 @@ registerBlockType( 'am-apiplugin/am-apiblock', {
     ),
     save: ({ attributes }) => {
         const { data, hiddenColumns } = attributes;
+
+        if (!data) {
+            return;
+        }
+
         return (
             <div { ...useBlockProps.save() } >
                 <Table data={data} hiddenColumns={hiddenColumns} />

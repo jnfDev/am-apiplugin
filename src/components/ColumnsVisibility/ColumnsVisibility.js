@@ -1,8 +1,9 @@
 import { ToggleControl } from '@wordpress/components';
+import './ColumnsVisibility.scss';
 
 export const ColumnsVisibility = ({ columns = [], setHiddenColumns, hiddenColumns = [] }) => {
     return (
-        <div className='columns-visibility'>
+        <div className='Am-ColumnsVisibility'>
             {columns.map((col, index) => {
                 const isHidden = hiddenColumns.includes(`column_${index}`);
                 return (

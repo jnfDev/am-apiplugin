@@ -1,0 +1,23 @@
+.wp-block-am-apiplugin-am-apiblock .Error {
+    background-color: #EFC5C2;
+    padding: 16px;
+    text-align: center;
+    border-radius: 10px;
+    h1 {
+        font-size: 4.5rem;
+        margin: 1rem 0;
+        color: #d35f4e;
+        font-weight: 700;
+    }
+
+    span.dashicons-dismiss {
+        $dashion-dimension: 100;
+        font-size: calc($dashion-dimension / 16) + unquote("rem");;
+        width: $dashion-dimension + unquote("px");;
+        height: $dashion-dimension + unquote("px");;
+        color: #DB513C;
+    }
+    p {
+        color: #d35f4e;
+    }
+}
