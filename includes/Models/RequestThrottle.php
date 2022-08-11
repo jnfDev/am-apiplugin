@@ -33,7 +33,7 @@ class RequestThrottle implements RequestThrottleInterface
         int $throttleTime = HOUR_IN_SECONDS
     ) {
         if ( empty( $hostURL ) || false === filter_var( $hostURL, FILTER_VALIDATE_URL ) ) {
-            throw new InvalidObjectInstanceException( "Invalid Request's Endpoint." );
+            throw new InvalidObjectInstanceException( "Invalid Request's Host URL." );
         }
 
         $this->throttleKey  = self::PREFIX . preg_replace( '/[^a-zA-Z0-9_]/', '_', parse_url( $hostURL, PHP_URL_HOST ) );

@@ -2,6 +2,8 @@
 
 namespace Am\APIPlugin;
 
+use WP_CLI;
+use Am\APIPlugin\CLI\RequestThrottleCLI;
 use Am\APIPlugin\APIBlock;
 use Am\APIPlugin\Admin\AdminAJAXEndpoints;
 
@@ -60,6 +62,9 @@ final class APIPlugin
 
         // Load custom block
         APIBlock::run();
+
+        // Register custom CLI commands
+        class_exists( WP_CLI::class ) && WP_CLI::add_command( 'request-throttle', RequestThrottleCLI::class );
     }
 
     protected function admin()
