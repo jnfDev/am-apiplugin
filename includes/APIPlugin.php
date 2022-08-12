@@ -6,6 +6,7 @@ use WP_CLI;
 use Am\APIPlugin\CLI\RequestThrottleCLI;
 use Am\APIPlugin\APIBlock;
 use Am\APIPlugin\Admin\AdminAJAXEndpoints;
+use Am\APIPlugin\Admin\AdminPage;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -70,5 +71,6 @@ final class APIPlugin
     protected function admin()
     {
         AdminAJAXEndpoints::run();
+        AdminPage::run();
     }
 }

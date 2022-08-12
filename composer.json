@@ -2,7 +2,8 @@
     "name": "am/apiplugin",
     "autoload": {
         "psr-4": {
-            "Am\\APIPlugin\\": "includes/"
+            "Am\\APIPlugin\\": "includes/",
+            "Am\\APIPlugin\\Admin\\": "admin/"
         }
     },
     "autoload-dev": {

@@ -1,0 +1,76 @@
+#wpcontent {
+    padding: 0; /*Override default wp padding*/
+}
+
+#am-admin-page .logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 18px;
+}
+#am-admin-page .logo .title {
+    padding-left: 16px;   
+}
+
+#am-admin-page nav {
+    background-color: #fff;
+}
+#am-admin-page nav .tab-item {
+    margin: 0 18px;
+    padding: 18px 0;
+    display: inline-block;
+    color: #6B6B6C;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+#am-admin-page nav .tab-item.active {
+    border-bottom: 3px solid #E7973A;
+}
+
+#am-admin-page .tab-content {
+    padding: 18px;
+}
+
+#am-admin-page .tab-content .tab {
+    display: none;
+}
+#am-admin-page .tab-content .tab.active {
+    display: block;
+}
+
+#am-admin-page .select-challenge-id {
+    margin-bottom: 2rem;
+}
+
+#am-admin-page .select-challenge-id select {
+    min-width: 60px;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#am-admin-page .tab-content .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+#am-admin-page .tab-content .row:last-child {
+    border-bottom: none;
+}
+
+#am-admin-page .tab-content .row > div:nth-child(1) {
+    flex-grow: 1;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+#am-admin-page .tab-content .row > div:nth-child(2) {
+    flex-grow: 3;
+}
+
+#am-admin-page .tab-content .row > div > * {
+    margin-top: 0;
+    font-size: 1rem;
+} 
