@@ -2,7 +2,7 @@
 
 namespace Am\APIPlugin\Interfaces;
 
-interface RequestThrottleInterface
+interface RequestsThrottlingInterface
 {
     /**
      * Check if it's doing throttling.

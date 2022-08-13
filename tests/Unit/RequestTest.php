@@ -4,7 +4,7 @@ namespace Am\APIPlugin\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Am\APIPlugin\Models\Request;
-use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Models\RequestsThrottling;
 use Am\APIPlugin\Models\FallbackResponse;
 use Am\APIPlugin\Exceptions\RequestFailedException;
 
@@ -26,14 +26,14 @@ final class RequestTest extends TestCase
          * We have specific test class for testing the Request Throttle, 
          * check it here: tests/Unit/RequestThrottleTest.php
          */
-        $this->requestThrottle = new RequestThrottle( self::HOST_URL );
+        $this->requestThrottle = new RequestsThrottling( self::HOST_URL );
         $this->request         = new Request( $this->requestThrottle );
     }
 
     protected function tearDown(): void
     {
         // Let's clean everything up.
-        RequestThrottle::reset();
+        RequestsThrottling::reset();
         FallbackResponse::reset();
     }
 

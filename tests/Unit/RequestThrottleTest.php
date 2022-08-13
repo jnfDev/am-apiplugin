@@ -3,7 +3,7 @@
 namespace Jnfdev\APIPlugin\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Models\RequestsThrottling;
 use Am\APIPlugin\Exceptions\InvalidObjectInstanceException;
 
 final class RequestThrottleTest extends TestCase
@@ -14,24 +14,24 @@ final class RequestThrottleTest extends TestCase
     
     protected function tearDown(): void
     {
-        RequestThrottle::reset();
+        RequestsThrottling::reset();
     }
 
     public function testCanBeCreatedWithValidEndpoint(): void
     {
-        $reqThrottle = new RequestThrottle( self::VALID_HOST_URL );
-        $this->assertInstanceOf( RequestThrottle::class, $reqThrottle );
+        $reqThrottle = new RequestsThrottling( self::VALID_HOST_URL );
+        $this->assertInstanceOf( RequestsThrottling::class, $reqThrottle );
     }
 
     public function testCannotBeCreatedWithInvalidEndpoint(): void
     {
         $this->expectException( InvalidObjectInstanceException::class );
-        $reqThrottle = new RequestThrottle( self::INVALID_HOST_URL );
+        $reqThrottle = new RequestsThrottling( self::INVALID_HOST_URL );
     }
 
     public function testCanStartThrottling()
     {
-        $reqThrottle = new RequestThrottle( self::VALID_HOST_URL );
+        $reqThrottle = new RequestsThrottling( self::VALID_HOST_URL );
         $reqThrottle->throttling();
 
         $this->assertTrue( $reqThrottle->isThrottling() );
@@ -39,7 +39,7 @@ final class RequestThrottleTest extends TestCase
 
     public function testCanResetThrottling()
     {
-        $reqThrottle = new RequestThrottle( self::VALID_HOST_URL );
+        $reqThrottle = new RequestsThrottling( self::VALID_HOST_URL );
         $reqThrottle->throttling();
 
         $reqThrottle->reset();
@@ -48,27 +48,27 @@ final class RequestThrottleTest extends TestCase
 
     public function testDoesThrottlingDisappearAfterFiveSeconds()
     {
-        ( new RequestThrottle( self::VALID_HOST_URL, 5 ) )->throttling();
+        ( new RequestsThrottling( self::VALID_HOST_URL, 5 ) )->throttling();
 
-        $req1 = new RequestThrottle( self::VALID_HOST_URL );
+        $req1 = new RequestsThrottling( self::VALID_HOST_URL );
         $this->assertTrue( $req1->isThrottling() );
 
         sleep( 10 );
 
-        $req2 = new RequestThrottle( self::VALID_HOST_URL );
+        $req2 = new RequestsThrottling( self::VALID_HOST_URL );
         $this->assertFalse( $req2->isThrottling() );
     }
 
     public function testDoesnotThrottlingDisappearBeforeFiveSeconds()
     {
-        ( new RequestThrottle( self::VALID_HOST_URL, 5 ) )->throttling();
+        ( new RequestsThrottling( self::VALID_HOST_URL, 5 ) )->throttling();
 
-        $req1 = new RequestThrottle( self::VALID_HOST_URL );
+        $req1 = new RequestsThrottling( self::VALID_HOST_URL );
         $this->assertTrue( $req1->isThrottling() );
 
         sleep( 3 );
 
-        $req2 = new RequestThrottle( self::VALID_HOST_URL );
+        $req2 = new RequestsThrottling( self::VALID_HOST_URL );
         $this->assertTrue( $req2->isThrottling() );
     }
 }

@@ -3,13 +3,13 @@
 namespace Am\APIPlugin\Models;
 
 use wpdb;
-use Am\APIPlugin\Interfaces\RequestThrottleInterface;
+use Am\APIPlugin\Interfaces\RequestsThrottlingInterface;
 use Am\APIPlugin\Exceptions\InvalidObjectInstanceException;
 use Am\APIPlugin\Exceptions\WpdbNotDefinedException;
 
 defined( 'ABSPATH' ) || exit;
 
-class RequestThrottle implements RequestThrottleInterface
+class RequestsThrottling implements RequestsThrottlingInterface
 {
     /**
      * @var int Throttling duration in seconds.

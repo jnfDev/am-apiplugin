@@ -4,7 +4,7 @@ namespace Am\APIPlugin\CLI;
 
 use WP_CLI;
 use Exception;
-use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Models\RequestsThrottling;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +18,7 @@ final class RequestThrottleCLI
     {
         try {
             $hostURL = $args[0];
-            (new RequestThrottle( $hostURL ))->stopThrottling();
+            (new RequestsThrottling( $hostURL ))->stopThrottling();
             WP_CLI::line( 'Request Throttlers was reset.' );
 
         } catch ( Exception $e ) {
@@ -33,7 +33,7 @@ final class RequestThrottleCLI
     public function resetAll()
     {        
         try {
-            RequestThrottle::reset();
+            RequestsThrottling::reset();
             WP_CLI::line( 'All Request Throttlers were reset.' );
 
         } catch ( Exception $e ) {

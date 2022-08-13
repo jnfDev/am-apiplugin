@@ -4,7 +4,7 @@ namespace Am\APIPlugin\Models;
 
 use Am\APIPlugin\Interfaces\RequestInterface;
 use Am\APIPlugin\Models\Request;
-use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Models\RequestsThrottling;
 use Am\APIPlugin\Exceptions\APIRequestErrorException;
 
 defined( 'ABSPATH' ) || exit;
@@ -20,7 +20,7 @@ class APIRequest
     public function __construct( RequestInterface $requestHandler = null ) {
         
         if ( is_null( $requestHandler ) ) {
-            $requestThrottle = new RequestThrottle( self::HOST_URL );
+            $requestThrottle = new RequestsThrottling( self::HOST_URL );
             $requestHandler  = new Request( $requestThrottle );
         }
 

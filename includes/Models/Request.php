@@ -5,7 +5,7 @@ namespace Am\APIPlugin\Models;
 use WP_Http;
 use Am\APIPlugin\Models\FallbackResponse;
 use Am\APIPlugin\Interfaces\RequestInterface;
-use Am\APIPlugin\Interfaces\RequestThrottleInterface;
+use Am\APIPlugin\Interfaces\RequestsThrottlingInterface;
 use Am\APIPlugin\Interfaces\FallbackResponseInterface;
 use Am\APIPlugin\Exceptions\EmptyFallbackResponseException;
 use Am\APIPlugin\Exceptions\RequestFailedException;
@@ -21,7 +21,7 @@ class Request extends WP_Http implements RequestInterface
     protected $throttlePrefix;
 
     public function __construct(
-        RequestThrottleInterface $requestThrottle,
+        RequestsThrottlingInterface $requestThrottle,
         FallbackResponseInterface $fallbackResponse = null
     ) {
         $this->requestThrottle  = $requestThrottle;

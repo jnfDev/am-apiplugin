@@ -3,9 +3,8 @@
 namespace Am\APIPlugin\Admin;
 
 use Exception;
-use Am\APIPlugin\APIPlugin;
 use Am\APIPlugin\Models\FallbackResponse;
-use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Models\RequestsThrottling;
 use Am\APIPlugin\Models\APIRequest;
 use Am\APIPlugin\Singleton;
 use Am\APIPlugin\Exceptions\RequestFailedException;
@@ -47,7 +46,7 @@ final class AdminAJAXEndpoints
             }
 
             FallbackResponse::reset();
-            RequestThrottle::reset();
+            RequestsThrottling::reset();
 
             wp_send_json_success();
 

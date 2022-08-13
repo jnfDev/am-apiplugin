@@ -4,7 +4,7 @@ namespace Am\APIPlugin\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Am\APIPlugin\Models\APIRequest;
-use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Models\RequestsThrottling;
 use Am\APIPlugin\Models\FallbackResponse;
 use Am\APIPlugin\Exceptions\APIRequestErrorException;
 
@@ -13,7 +13,7 @@ final class APIRequestTest extends TestCase
     protected function tearDown(): void
     {
         // Let's clean everything up.
-        RequestThrottle::reset();
+        RequestsThrottling::reset();
         FallbackResponse::reset();
     }
 
