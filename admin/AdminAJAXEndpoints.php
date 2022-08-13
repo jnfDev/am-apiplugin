@@ -29,7 +29,7 @@ final class AdminAJAXEndpoints
 
     protected function validateAJAXRequest(): bool
     {
-        $nonce      = $_POST['wpnonce'];
+        $nonce      = sanitize_key( $_POST['wpnonce'] );
         $textdomain = APIPlugin::getInstance()->textdomain;
         if ( ! wp_verify_nonce( $nonce, "_wpnonce_{$textdomain}"  ) ) {
             return false;
@@ -66,7 +66,7 @@ final class AdminAJAXEndpoints
 
             $resourceId = (int) $_POST['challenge_id'];
             if ( empty( $resourceId ) ) {
-                throw new RequestFailedException("Missing challenge ID param.", 1);
+                throw new RequestFailedException("Missing challenge ID param", 1);
             }
 
             $apiRequest = new APIRequest();
