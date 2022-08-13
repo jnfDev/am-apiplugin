@@ -42,14 +42,17 @@ final class AdminAJAXEndpoints
                 throw new RequestFailedException("Invalid AJAX Request", 1);
             }
 
-            // Do actual request here..
-            $resourceId = 1;
+            $resourceId = (int) $_POST['challenge_id'];
+            if ( empty( $resourceId ) ) {
+                throw new RequestFailedException("Missing challenge ID param.", 1);
+            }
+
             $apiRequest = new APIRequest();
             $apiData    = $apiRequest->getChallengeById( $resourceId );
 
             wp_send_json_success($apiData);
 
-        } catch (Exception $e) {
+        } catch ( Exception $e ) {
             wp_send_json_error([
                 'errorMessage' => $e->getMessage()
             ]);

@@ -2,7 +2,7 @@ const AmAdminPage = {
 
     adminVars,
     
-    context: 'am-admin-page',
+    context: '#am-admin-page',
 
     onTabChange: function(e) {
         const $tabItem   = jQuery(e.target);
@@ -18,23 +18,26 @@ const AmAdminPage = {
     },
 
     fetchChallenge: function() {
+        const { __ } = wp.i18n;
+        const { url: ajaxUrl, action, nonce, textdomain } = this.adminVars;
         const challengeId = jQuery('#am-select-challenge').val();
 
         jQuery.post(
-            this.adminVars.url,
+            ajaxUrl,
             {
-                action: this.adminVars.action,
-                wpnonce: this.adminVars.nonce,
+                action: action,
+                wpnonce: nonce,
                 challengeid: challengeId,
             },
             function({ data, success }) {
-
                 const $challengeContent = jQuery('#challenge-content');
 
+                // Reset content.
                 $challengeContent.html('');
 
                 if (!success || !data) {
-                    // Print error
+                    console.error('Wrong AJAX response.');
+                    alert(__('Something went wrong.', textdomain));
                 }
     
                 const { data: tableData } = data; 
@@ -44,9 +47,9 @@ const AmAdminPage = {
                     const output = `
                         <div>${row.fname} ${row.lname}</div>
                         <div>
-                            <p><b>ID:</b> ${row.id}</p>
-                            <p><b>Email:</b> ${row.email}</p>
-                            <p><b>Date:</b> ${row.date}</p>
+                            <p><b>${__(`ID:`, textdomain)}</b> ${row.id}</p>
+                            <p><b>${__(`Email:`, textdomain)}</b> ${row.email}</p>
+                            <p><b>${__(`Date:`, textdomain)}</b> ${row.date}</p>
                         </div>
                     `;
 
@@ -66,8 +69,8 @@ const AmAdminPage = {
         this.fetchChallenge();
 
         // Events
-        jQuery('.tab-item', this.context).click(this.onTabChange);
-        jQuery('.fetch-challenge', this.context).click(this.fetchChallenge);
+        jQuery('a.tab-item', this.context).click(this.onTabChange);
+        jQuery('button.fetch-challenge', this.context).click(this.fetchChallenge);
     }
 }; 
 

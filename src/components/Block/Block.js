@@ -41,6 +41,7 @@ export const Block = ({ attributes, setAttributes }) => {
         jQuery.post(
             adminVars.url,
             {
+                challenge_id: 1, // There's only one resource for now, but it could change in the future.
                 action: adminVars.action,
                 wpnonce: adminVars.nonce,
             },

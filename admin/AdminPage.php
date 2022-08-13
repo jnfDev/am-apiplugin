@@ -41,7 +41,9 @@ final class AdminPage
         /**
          * Views variables 
          */
-        $assetUrl = $this->plugin->rootURL . '/admin/assets';
+        $assetUrl     = $this->plugin->rootURL . '/admin/assets';
+        $textdomain   = $this->plugin->textdomain;
+        $challengeIds = [1];
 
         require_once __DIR__ . '/views/admin-page.php';
     }
@@ -53,13 +55,22 @@ final class AdminPage
             return;
         }
 
-        wp_enqueue_script( 'admin-page-script', $this->plugin->rootURL . '/admin/assets/js/admin-page.js', [ 'jquery' ], $this->plugin->pluginVersion );
+        $scriptHandle = 'admin-page-script';
+        
+        wp_enqueue_script( $scriptHandle, $this->plugin->rootURL . '/admin/assets/js/admin-page.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion );
         wp_enqueue_style( 'admin-page-styles', $this->plugin->rootURL . '/admin/assets/css/admin-page.css', [], $this->plugin->pluginVersion );
-
-        wp_localize_script( 'admin-page-script', 'adminVars', array(
-            'url'    => admin_url( 'admin-ajax.php' ),
-            'nonce'  => wp_create_nonce( "_wpnonce_{$this->plugin->textdomain}" ),
-            'action' => 'am_get_challenge_data'
-        ) );
+        
+        wp_set_script_translations( $scriptHandle,  $this->plugin->textdomain );
+        
+        wp_localize_script( 
+            $scriptHandle,
+            'adminVars', 
+            [
+                'action'     => 'am_get_challenge_data',
+                'url'        => admin_url( 'admin-ajax.php' ),
+                'nonce'      => wp_create_nonce( "_wpnonce_{$this->plugin->textdomain}" ),
+                'textdomain' => $this->plugin->textdomain
+            ]
+        );
     }
 }
