@@ -2,6 +2,8 @@
 
 namespace Am\APIPlugin;
 
+use Am\APIPlugin\Admin\AdminAJAXEndpoints;
+
 defined( 'ABSPATH' ) || exit;
 
 final class APIBlock
@@ -41,7 +43,7 @@ final class APIBlock
                     'type' => 'object',
                     'default' => [
                         'url'    => admin_url( 'admin-ajax.php' ),
-                        'nonce'  => wp_create_nonce( "_wpnonce_{$textdomain}" ),
+                        'nonce'  => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
                         'action' => 'am_get_challenge_data'
                     ]
                 ],

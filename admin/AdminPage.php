@@ -39,7 +39,7 @@ final class AdminPage
     public function renderMenuPage(): void
     {   
         /**
-         * Views variables 
+         * View's variables 
          */
         $assetUrl     = $this->plugin->rootURL . '/admin/assets';
         $textdomain   = $this->plugin->textdomain;
@@ -67,7 +67,7 @@ final class AdminPage
             'adminVars', 
             [
                 'url'        => admin_url( 'admin-ajax.php' ),
-                'nonce'      => wp_create_nonce( "_wpnonce_{$this->plugin->textdomain}" ),
+                'nonce'      => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
                 'textdomain' => $this->plugin->textdomain
             ]
         );

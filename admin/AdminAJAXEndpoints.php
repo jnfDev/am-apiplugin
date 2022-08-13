@@ -16,6 +16,8 @@ final class AdminAJAXEndpoints
 {
     use Singleton;
 
+    const NONCE_ACTION = "_wpnonce_am_apiplugin_";
+
     protected function init()
     {
         if ( ! ( defined('DOING_AJAX') && DOING_AJAX ) ) {
@@ -29,9 +31,8 @@ final class AdminAJAXEndpoints
 
     protected function validateAJAXRequest(): bool
     {
-        $nonce      = sanitize_key( $_POST['wpnonce'] );
-        $textdomain = APIPlugin::getInstance()->textdomain;
-        if ( ! wp_verify_nonce( $nonce, "_wpnonce_{$textdomain}"  ) ) {
+        $nonce = sanitize_key( $_POST['wpnonce'] );
+        if ( ! wp_verify_nonce( $nonce, self::NONCE_ACTION  ) ) {
             return false;
         }
         
