@@ -29,8 +29,11 @@
             <div class="select-challenge-id">
                 <label><?php _e( 'Select challenge:', $textdomain ); ?></label>
                 <select id="am-select-challenge">
-                    <!-- TODO: Load it dynamicly -->
-                    <option selected value="1">1</option>
+                    <?php foreach ( $challengeIds as $challengeId ): ?>
+                    <option selected value="<?php echo esc_attr( $challengeId )?>">
+                        <?php echo esc_attr( $challengeId )?>
+                    </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 

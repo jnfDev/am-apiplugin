@@ -66,7 +66,6 @@ final class AdminPage
             $scriptHandle,
             'adminVars', 
             [
-                'action'     => 'am_get_challenge_data',
                 'url'        => admin_url( 'admin-ajax.php' ),
                 'nonce'      => wp_create_nonce( "_wpnonce_{$this->plugin->textdomain}" ),
                 'textdomain' => $this->plugin->textdomain
