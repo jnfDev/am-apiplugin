@@ -53,7 +53,7 @@ final class AdminAJAXEndpoints
 
         } catch ( Exception $e ) {
             wp_send_json_error([
-                'errorMessage' => $e->getMessage()
+                'error_message' => $e->getMessage()
             ]);
         } 
     }
@@ -77,7 +77,7 @@ final class AdminAJAXEndpoints
 
         } catch ( Exception $e ) {
             wp_send_json_error([
-                'errorMessage' => $e->getMessage()
+                'error_message' => $e->getMessage()
             ]);
         }
     }
