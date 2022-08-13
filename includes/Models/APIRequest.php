@@ -40,7 +40,7 @@ class APIRequest
         return $bodyResp;
     }
 
-    protected function getBaseUrl()
+    protected function getBaseUrl(): string
     {
         return self::HOST_URL . '/' . self::VERSION; 
     }

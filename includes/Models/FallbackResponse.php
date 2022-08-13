@@ -53,7 +53,7 @@ class FallbackResponse implements FallbackResponseInterface
     {
         global $wpdb;
         
-        if ( is_null( $wpdb ) || !( $wpdb instanceof wpdb ) ) {
+        if ( is_null( $wpdb ) || ! ( $wpdb instanceof wpdb ) ) {
             throw new WpdbNotDefinedException();
         }
 
@@ -63,7 +63,7 @@ class FallbackResponse implements FallbackResponseInterface
             "SELECT `option_name` FROM `{$wpdb->options}` WHERE `option_name` LIKE '_transient_{$prefix}%'",
         );
 
-        foreach ($transientsToDelete as $transient) {
+        foreach ( $transientsToDelete as $transient ) {
             delete_transient( $transient );
         }
     }
@@ -71,7 +71,7 @@ class FallbackResponse implements FallbackResponseInterface
     /**
      * Generate Fallback Response key based on URL.
      */
-    protected function generateFallbackResponseKey( $requestUrl )
+    protected function generateFallbackResponseKey( $requestUrl ): string
     {
         if ( empty( $requestUrl ) || false === filter_var( $requestUrl, FILTER_VALIDATE_URL ) ) {
             throw new InvalidURLException( "Invalid Request's URL." );

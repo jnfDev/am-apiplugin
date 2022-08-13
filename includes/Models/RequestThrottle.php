@@ -82,7 +82,7 @@ class RequestThrottle implements RequestThrottleInterface
             "SELECT REPLACE(`option_name`, '_transient_', '') FROM `{$wpdb->options}` WHERE `option_name` LIKE '_transient_{$prefix}%'",
         );
 
-        foreach ($transientsToDelete as $transient) {
+        foreach ( $transientsToDelete as $transient ) {
             delete_transient( $transient );
         }
     }

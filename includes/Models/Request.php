@@ -60,22 +60,22 @@ class Request extends WP_Http implements RequestInterface
         return $response;
     }
 
-    public function post( $url, $args = [])
+    public function post( $url, $args = [] )
     {
         // Not yet implemented, but maybe in the future 😉
     }
 
-    public function put( $url, $args = [])
+    public function put( $url, $args = [] )
     {
         // Not yet implemented, but maybe in the future 😉
     }
 
-    public function patch( $url, $args = [])
+    public function patch( $url, $args = [] )
     {
         // Not yet implemented, but maybe in the future 😉
     }
 
-    public function delete( $url, $args = [])
+    public function delete( $url, $args = [] )
     {
         // Not yet implemented, but maybe in the future 😉
     }

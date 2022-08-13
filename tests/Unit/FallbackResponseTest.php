@@ -25,7 +25,7 @@ final class FallbackResponseTest extends TestCase
 
         $reflectionMethod = new ReflectionMethod( FallbackResponse::class, 'generateFallbackResponseKey' );
         $reflectionMethod->setAccessible(true);
-        $fallbackRespKey = $reflectionMethod->invoke($fallbackResp, self::VALID_URL);
+        $fallbackRespKey = $reflectionMethod->invoke( $fallbackResp, self::VALID_URL );
 
         $this->assertEquals( '_fallback_response_https___www_myvalidendpoint_com', $fallbackRespKey );
     }
@@ -38,7 +38,7 @@ final class FallbackResponseTest extends TestCase
         $reflectionMethod = new ReflectionMethod( FallbackResponse::class, 'generateFallbackResponseKey' );
 
         $reflectionMethod->setAccessible(true);
-        $fallbackRespKey = $reflectionMethod->invoke($fallbackResp, self::INVALID_URL);
+        $fallbackRespKey = $reflectionMethod->invoke( $fallbackResp, self::INVALID_URL );
     }
 
     public function testCanBeCreated(): void

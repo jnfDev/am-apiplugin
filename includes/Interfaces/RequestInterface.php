@@ -4,13 +4,13 @@ namespace Am\APIPlugin\Interfaces;
 
 interface RequestInterface
 {
-    public function get( $url, $args = []);
+    public function get( $url, $args = [] );
 
-    public function post( $url, $args = []);
+    public function post( $url, $args = [] );
 
-    public function put( $url, $args = []);
+    public function put( $url, $args = [] );
 
-    public function patch( $url, $args = []);
+    public function patch( $url, $args = [] );
 
-    public function delete( $url, $args = []);
+    public function delete( $url, $args = [] );
 }

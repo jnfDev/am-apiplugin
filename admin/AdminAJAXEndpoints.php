@@ -42,7 +42,7 @@ final class AdminAJAXEndpoints
     {
         try {
             if( ! $this->validateAJAXRequest() ) {
-                throw new RequestFailedException("Invalid AJAX Request", 1);
+                throw new RequestFailedException( "Invalid AJAX Request", 1 );
             }
 
             FallbackResponse::reset();
@@ -61,18 +61,18 @@ final class AdminAJAXEndpoints
     {
         try {
             if( ! $this->validateAJAXRequest() ) {
-                throw new RequestFailedException("Invalid AJAX Request", 1);
+                throw new RequestFailedException( "Invalid AJAX Request", 1 );
             }
 
             $resourceId = (int) $_POST['challenge_id'];
             if ( empty( $resourceId ) ) {
-                throw new RequestFailedException("Missing challenge ID param", 1);
+                throw new RequestFailedException( "Missing challenge ID param", 1 );
             }
 
             $apiRequest = new APIRequest();
             $apiData    = $apiRequest->getChallengeById( $resourceId );
 
-            wp_send_json_success($apiData);
+            wp_send_json_success( $apiData );
 
         } catch ( Exception $e ) {
             wp_send_json_error([

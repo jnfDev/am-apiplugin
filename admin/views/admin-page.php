@@ -31,8 +31,8 @@
                 <label><?php _e( 'Select challenge:', $textdomain ); ?></label>
                 <select id="am-select-challenge">
                     <?php foreach ( $challengeIds as $challengeId ): ?>
-                    <option selected value="<?php echo esc_attr( $challengeId )?>">
-                        <?php echo esc_attr( $challengeId )?>
+                    <option selected value="<?php echo esc_attr( $challengeId ); ?>">
+                        <?php echo esc_attr( $challengeId ); ?>
                     </option>
                     <?php endforeach; ?>
                 </select>
