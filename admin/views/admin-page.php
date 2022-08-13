@@ -1,9 +1,9 @@
 <?php 
 /**
- * 
+ * All the view's variables.
  * @var string $assetUrl
  * @var string $textdomain
- * 
+ * @var array $challengeIds
  */
 ?>
 
@@ -24,8 +24,9 @@
     </header>
 
     <div class="tab-content">
-        <div class="tab active" id="challenge-tab">
-            
+
+        <!-- Tab 1  -->
+        <div class="tab active" id="challenge-tab">  
             <div class="select-challenge-id">
                 <label><?php _e( 'Select challenge:', $textdomain ); ?></label>
                 <select id="am-select-challenge">
@@ -38,15 +39,27 @@
             </div>
 
             <!-- We're going to fill it out with AJAX -->
-            <div id="challenge-content">
-            </div>
+            <div id="challenge-content"></div>
 
             <button class="fetch-challenge"><?php _e( 'Refresh Data', $textdomain ); ?></button>
         </div>
 
+        <!-- Tab 2  -->
         <div class="tab" id="reset-tab">
-            <p><?php _e( 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe exercitationem voluptatum cumque cupiditate necessitatibus perferendis aspernatur, beatae temporibus minima rerum culpa ex veritatis. Quos odit quia eum rerum, earum ipsam?', $textdomain ); ?></p>
+            <p><?php _e( 'Reset or delete all the data store by the plugin on the options table.', $textdomain ); ?></p>
+            <p><?php _e( 'The next data will be delete:', $textdomain ); ?></p>
+            <ul>
+                <li>
+                    <b><?php _e( 'Request Throttle transient:', $textdomain ) ?></b>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, quod aliquam id amet tenetur asperiores assumenda hic libero temporibus maxime molestias minima atque necessitatibus.
+                </li>
+                <li>
+                    <b><?php _e( 'Fallback Response transient:', $textdomain ) ?></b>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat corrupti dicta aliquid ipsum, consequatur voluptatem similique nesciunt!
+                </li>
+            </ul>
             <button class="reset-plugin"><?php _e( 'Reset All Data Stored', $textdomain ); ?></button>
         </div>
+
     </div>
 </div>

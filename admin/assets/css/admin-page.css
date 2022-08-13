@@ -2,6 +2,20 @@
     padding: 0; /*Override default wp padding*/
 }
 
+#am-admin-page,
+#am-admin-page p {
+    font-size: 1rem;
+}
+
+#am-admin-page button {
+    margin-top: 2rem;
+    padding: 10px 14px;
+    border-radius: 5px;
+    background-color: #283261;
+    color: white;
+    cursor: pointer;
+}
+
 #am-admin-page .logo {
     display: flex;
     justify-content: flex-start;
@@ -68,10 +82,18 @@
 }
 #am-admin-page #challenge-tab .row > div > * {
     margin-top: 0;
-    font-size: 1rem;
 } 
 
 #am-admin-page #reset-tab p {
-    font-size: 1rem;
     max-width: 650px;
+    line-height: 1.5;
+}
+
+#am-admin-page #reset-tab ul {
+    margin: 1.5rem 0 0;
+    line-height: 1.5;
+    max-width: 650px;
+}
+#am-admin-page #reset-tab ul li {
+    margin-bottom: 1.2rem;
 }
