@@ -50,12 +50,14 @@
             <p><?php _e( 'The next data will be delete:', $textdomain ); ?></p>
             <ul>
                 <li>
-                    <b><?php _e( 'Request Throttle transient:', $textdomain ) ?></b>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, quod aliquam id amet tenetur asperiores assumenda hic libero temporibus maxime molestias minima atque necessitatibus.
+                    <b><?php _e( 'Requests Throttling:', $textdomain ) ?></b>
+                    <?php _e( 'This is the mechanism used by the plugin to limit the number of requests in a certain time.', $textdomain ); ?> 
+                    <?php _e( 'This class implements transient to create a temporal flag, so data is stored on the options table.', $textdomain ); ?>
                 </li>
                 <li>
-                    <b><?php _e( 'Fallback Response transient:', $textdomain ) ?></b>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat corrupti dicta aliquid ipsum, consequatur voluptatem similique nesciunt!
+                    <b><?php _e( 'Fallback Response:', $textdomain ) ?></b>
+                    <?php _e( 'This is the way the plugin ensures every request gets an answer even if the API Endpoint is "throttling".', $textdomain ); ?>
+                    <?php _e( 'This class implements transient to create a temporal variable, so data is stored on the options table.', $textdomain ); ?>
                 </li>
             </ul>
             <button class="reset-plugin"><?php _e( 'Reset All Data Stored', $textdomain ); ?></button>
