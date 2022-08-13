@@ -27,7 +27,7 @@ final class FallbackResponseTest extends TestCase
         $reflectionMethod->setAccessible(true);
         $fallbackRespKey = $reflectionMethod->invoke( $fallbackResp, self::VALID_URL );
 
-        $this->assertEquals( '_fallback_response_https___www_myvalidendpoint_com', $fallbackRespKey );
+        $this->assertEquals( '_fallback_response_httpswwwmyvalidendpointcom', $fallbackRespKey );
     }
 
     public function testCannotGenerateThrottleKeyWithInvalidURL(): void

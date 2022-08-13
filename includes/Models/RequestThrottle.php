@@ -36,7 +36,7 @@ class RequestThrottle implements RequestThrottleInterface
             throw new InvalidObjectInstanceException( "Invalid Request's Host URL." );
         }
 
-        $this->throttleKey  = self::PREFIX . preg_replace( '/[^a-zA-Z0-9_]/', '_', parse_url( $hostURL, PHP_URL_HOST ) );
+        $this->throttleKey  = self::PREFIX . sanitize_key( parse_url( $hostURL, PHP_URL_HOST ) );
         $this->throttleTime = $throttleTime;
     }
 

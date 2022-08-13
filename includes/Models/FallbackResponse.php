@@ -77,6 +77,6 @@ class FallbackResponse implements FallbackResponseInterface
             throw new InvalidURLException( "Invalid Request's URL." );
         }
 
-        return self::PREFIX . preg_replace( '/[^a-zA-Z0-9_]/', '_', $requestUrl );
+        return self::PREFIX . sanitize_key( $requestUrl );
     }
 }
