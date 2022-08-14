@@ -28,9 +28,23 @@ const AmAdminPage = {
         $activeTab.addClass('active');
     },
 
-    resetAllData: function() {
+    toggleLoading: function($elm) {
+        if ($elm.hasClass('loading')){
+            $elm.removeClass('loading');
+            $elm.attr('disabled', false);
+            return;
+        }
+
+        $elm.addClass('loading');
+        $elm.attr('disabled', true);
+    },
+
+    resetAllData: function(e) {
+        const $elm = jQuery(e.target);
         const { __ } = this.i18n;
         const { url: ajaxUrl, nonce, textdomain } = this.adminVars;
+
+        this.toggleLoading($elm);
 
         jQuery.post(
             ajaxUrl,
@@ -38,8 +52,10 @@ const AmAdminPage = {
                 action: 'am_reset_all_data',
                 wpnonce: nonce,
             },
-            function(resp) {
+            (resp) => {
                 const success = resp?.success || false;
+
+                this.toggleLoading($elm);
 
                 if (!success) {
                     alert(__('Something went wrong.', textdomain));
@@ -51,46 +67,50 @@ const AmAdminPage = {
         );
     },
 
-    fetchChallenge: function() {
+    fetchChallenge: function(e) {
         const { __ } = this.i18n;
         const { url: ajaxUrl, nonce, textdomain } = this.adminVars;
         const challengeId = jQuery('#am-select-challenge').val();
 
-        jQuery.post(
-            ajaxUrl,
-            {
-                action: 'am_get_challenge_data',
-                wpnonce: nonce,
-                challenge_id: challengeId,
-            },
-            function({ data, success }) {
-                const $challengeContent = jQuery('#challenge-content');
-
-                // Reset content.
-                $challengeContent.html('');
-
-                if (!success || !data) {
-                    alert(__('Something went wrong.', textdomain));
-                    console.error('Wrong AJAX response.');
-                }
+        return new Promise((resolve) => {
+            jQuery.post(
+                ajaxUrl,
+                {
+                    action: 'am_get_challenge_data',
+                    wpnonce: nonce,
+                    challenge_id: challengeId,
+                },
+                ({ data, success }) => {
+                    const $challengeContent = jQuery('#challenge-content');
     
-                const { data: tableData } = data; 
-                const rows = Object.values(tableData?.rows || {});
+                    // Reset content.
+                    $challengeContent.html('');
+    
+                    if (!success || !data) {
+                        alert(__('Something went wrong.', textdomain));
+                        console.error('Wrong AJAX response.');
+                    }
+        
+                    const { data: tableData } = data; 
+                    const rows = Object.values(tableData?.rows || {});
+    
+                    rows.forEach(function(row){
+                        const output = `
+                            <div>${row.fname} ${row.lname}</div>
+                            <div>
+                                <p><b>${__(`ID:`, textdomain)}</b> ${row.id}</p>
+                                <p><b>${__(`Email:`, textdomain)}</b> ${row.email}</p>
+                                <p><b>${__(`Date:`, textdomain)}</b> ${row.date}</p>
+                            </div>
+                        `;
+    
+                        $challengeContent.append('<div class="row">' + output + '</div>')
+                    });
 
-                rows.forEach(function(row){
-                    const output = `
-                        <div>${row.fname} ${row.lname}</div>
-                        <div>
-                            <p><b>${__(`ID:`, textdomain)}</b> ${row.id}</p>
-                            <p><b>${__(`Email:`, textdomain)}</b> ${row.email}</p>
-                            <p><b>${__(`Date:`, textdomain)}</b> ${row.date}</p>
-                        </div>
-                    `;
-
-                    $challengeContent.append('<div class="row">' + output + '</div>')
-                });
-            }
-        );
+                    resolve();
+                }
+            );
+        });
     },
 
     bindings: function() {
@@ -100,13 +120,24 @@ const AmAdminPage = {
     },
 
     init: function() {
+        const { __ } = this.i18n;
+        const { textdomain } = this.adminVars;
+
         this.bindings();
         this.fetchChallenge();
 
         // Events
         jQuery('a.tab-item', this.context).click(this.onTabChange);
-        jQuery('button.fetch-challenge', this.context).click(this.fetchChallenge);
         jQuery('button.reset-plugin', this.context).click(this.resetAllData);
+        jQuery('button.fetch-challenge', this.context).click((e) => {
+            const $elm = jQuery(e.target);
+            
+            this.toggleLoading($elm);
+            this.fetchChallenge().then(() => {
+                this.toggleLoading($elm);
+                alert(__('Data fetched.', textdomain))
+            });
+        });
     }
 }; 
 
