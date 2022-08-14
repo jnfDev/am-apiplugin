@@ -12,12 +12,20 @@ defined( 'ABSPATH' ) || exit;
 class FallbackResponse implements FallbackResponseInterface
 {
     /**
+     * @var string
+     * 
      * Prefix for Fallback Response Key
+     * Note: It will be saved on the option table as 
+     * _transient___fallback_response_...
      */
     const PREFIX = "_fallback_response_";
 
     /**
      * Get Fallback Response.
+     * 
+     * @param string $requestUrl Use to generate key. 
+     * 
+     * @return array
      */
     public function get( string $requestUrl ): array
     {
@@ -29,6 +37,11 @@ class FallbackResponse implements FallbackResponseInterface
 
     /**
      * Set Fallback Response.
+     * 
+     * @param string $requestUrl Use to generate key. 
+     * @param array  $data Response data to be stored.
+     * 
+     * @return bool
      */
     public function set( string $requestUrl, array $data ): bool
     {
@@ -38,6 +51,10 @@ class FallbackResponse implements FallbackResponseInterface
 
     /**
      * Delete Fallback Response.
+     * 
+     * @param string $requestUrl Use to generate key. 
+     * 
+     * @return bool
      */
     public function delete( string $requestUrl ): bool
     {
@@ -48,6 +65,10 @@ class FallbackResponse implements FallbackResponseInterface
     /**
      * Delete all Fallbacks Response 
      * stored in the database.
+     * 
+     * @throws WpdbNotDefinedException if wpdb is not loaded in globals.
+     * 
+     * @return void 
      */
     public static function reset(): void
     {
@@ -70,8 +91,14 @@ class FallbackResponse implements FallbackResponseInterface
 
     /**
      * Generate Fallback Response key based on URL.
+     * 
+     * @param string $requestUrl Use to generate key.
+     * 
+     * @throws InvalidURLException if given $requestUrl is invalid or empty.
+     * 
+     * @return string
      */
-    protected function generateFallbackResponseKey( $requestUrl ): string
+    protected function generateFallbackResponseKey( string $requestUrl ): string
     {
         if ( empty( $requestUrl ) || false === filter_var( $requestUrl, FILTER_VALIDATE_URL ) ) {
             throw new InvalidURLException( "Invalid Request's URL." );

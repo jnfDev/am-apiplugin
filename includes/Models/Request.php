@@ -14,23 +14,40 @@ defined( 'ABSPATH' ) || exit;
 
 class Request extends WP_Http implements RequestInterface
 {
-    protected $requestThrottle;
+    /**
+     * @var RequestsThrottlingInterface
+     */
+    protected $requestsThrottling;
 
+    /**
+     * @var FallbackResponseInterface
+     */
     protected $requestFallback;
 
-    protected $throttlePrefix;
-
+    /**
+     * @param RequestsThrottlingInterface $requestsThrottling
+     * @param FallbackResponseInterface|null $fallbackResponse
+     * @return void
+     */
     public function __construct(
-        RequestsThrottlingInterface $requestThrottle,
+        RequestsThrottlingInterface $requestsThrottling,
         FallbackResponseInterface $fallbackResponse = null
     ) {
-        $this->requestThrottle  = $requestThrottle;
-        $this->fallbackResponse = ! is_null( $fallbackResponse ) ? $fallbackResponse : new FallbackResponse();
+        $this->requestsThrottling  = $requestsThrottling;
+        $this->fallbackResponse    = ! is_null( $fallbackResponse ) ? $fallbackResponse : new FallbackResponse();
     }
 
-    public function get( $url, $args = [] )
+    /**
+     * Parent's method but with Requests Throttling 
+     * implementation on top.
+     * 
+     * @throws RequestFailedException If the request got an error.
+     * 
+     * @return array
+     */
+    public function get( $url, $args = [] ): array
     {
-        if ( $this->requestThrottle->isThrottling() ) {
+        if ( $this->requestsThrottling->isThrottling() ) {
             $fallbackResponse = $this->fallbackResponse->get( $url );
 
             if ( ! isset( $fallbackResponse['response']['code'] ) ) {
@@ -54,29 +71,33 @@ class Request extends WP_Http implements RequestInterface
             throw new RequestFailedException( $error->get_error_message() );
         }
 
-        $this->requestThrottle->throttling();
+        $this->requestsThrottling->throttling();
         $this->fallbackResponse->set( $url, $response );
 
         return $response;
     }
 
-    public function post( $url, $args = [] )
+    public function post( $url, $args = [] ): array
     {
         // Not yet implemented, but maybe in the future 😉
+        return [];
     }
 
-    public function put( $url, $args = [] )
+    public function put( $url, $args = [] ): array
     {
         // Not yet implemented, but maybe in the future 😉
+        return [];
     }
 
-    public function patch( $url, $args = [] )
+    public function patch( $url, $args = [] ): array
     {
         // Not yet implemented, but maybe in the future 😉
+        return [];
     }
 
-    public function delete( $url, $args = [] )
+    public function delete( $url, $args = [] ): array
     {
         // Not yet implemented, but maybe in the future 😉
+        return [];
     }
 }

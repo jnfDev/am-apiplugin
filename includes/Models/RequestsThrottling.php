@@ -14,59 +14,80 @@ class RequestsThrottling implements RequestsThrottlingInterface
     /**
      * @var int Throttling duration in seconds.
      */
-    protected $throttleTime;
+    protected $throttlingTime;
 
     /**
      * @var string ID for the throtter.
      */
-    protected $throttleKey;
+    protected $throttlingKey;
 
     /**
-     * Prefix used to save the throttle in database.
+     * @var string  
+     * 
+     * Prefix used to save the Requests Throttling flag in database.
      * Note: It will be saved on the option table as 
-     * _transient__request_throttle_...
+     * _transient__request_throttling_...
+     * 
      */
-    const PREFIX = '_request_throttle_';
+    const PREFIX = '_request_throttling_';
 
+    /**
+     * @param  string $hostURL Used to generate the throttlingKey.
+     * @param  int $throttlingTime The timespan in seconds for the throttling.
+     * 
+     * @throws InvalidObjectInstanceException if the provided $hostURL 
+     *                                        is an invalid URL.
+     * @return void
+     */
     public function __construct( 
         string $hostURL, 
-        int $throttleTime = HOUR_IN_SECONDS
+        int $throttlingTime = HOUR_IN_SECONDS
     ) {
         if ( empty( $hostURL ) || false === filter_var( $hostURL, FILTER_VALIDATE_URL ) ) {
             throw new InvalidObjectInstanceException( "Invalid Request's Host URL." );
         }
 
-        $this->throttleKey  = self::PREFIX . sanitize_key( parse_url( $hostURL, PHP_URL_HOST ) );
-        $this->throttleTime = $throttleTime;
+        $this->throttlingKey  = self::PREFIX . sanitize_key( parse_url( $hostURL, PHP_URL_HOST ) );
+        $this->throttlingTime = $throttlingTime;
     }
 
     /**
      * Check if it's doing throttling.
+     * 
+     * @return bool
      */
     public function isThrottling(): bool
     {
-        return ! empty( get_transient( $this->throttleKey ) );
+        return ! empty( get_transient( $this->throttlingKey ) );
     }
 
     /**
      * Start throttling.
+     * 
+     * @return bool
      */
     public function throttling(): bool
     {
-        return set_transient( $this->throttleKey, '1', $this->throttleTime );
+        return set_transient( $this->throttlingKey, '1', $this->throttlingTime );
     }
 
     /**
      * Stop the current throttling.
+     * 
+     * @return bool
      */
     public function stopThrottling(): bool
     {
-        return delete_transient( $this->throttleKey );
+        return delete_transient( $this->throttlingKey );
     }
 
     /**
-     * Reset or remove all Request Throttles
+     * Reset or remove all the Requests Throttling
      * stored in database.
+     * 
+     * @throws WpdbNotDefinedException if wpdb is not loaded in globals.
+     * 
+     * @return void
      */
     public static function reset(): void
     {

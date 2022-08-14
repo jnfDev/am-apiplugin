@@ -13,7 +13,11 @@ trait Singleton
         $this->init();
     }
 
-    public static function getInstance()
+    /**
+     * Get singleton's instance.
+     * @return self
+     */
+    public static function getInstance(): self
     {
         if ( ! self::$instance ) {
             self::$instance = new self();
@@ -22,10 +26,18 @@ trait Singleton
         return self::$instance;
     }
 
-    public static function run()
+    /**
+     * Shorthand for getInstance.
+     * @return void
+     */
+    public static function run(): void
     {
         self::getInstance();
     }
 
-    abstract public function init();
+    /**
+     * Singleton's init.
+     * @return void
+     */
+    abstract public function init(): void;
 }

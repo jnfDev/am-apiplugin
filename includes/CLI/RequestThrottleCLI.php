@@ -10,11 +10,14 @@ defined( 'ABSPATH' ) || exit;
 
 final class RequestThrottleCLI
 {
-
     /**
      * Reset specifict (Host URL) Request Throttle.
+     * 
+     * @param array $args Commant's args.
+     * 
+     * @return void
      */
-    public function reset( $args )
+    public function reset( array $args ): void
     {
         try {
             $hostURL = $args[0];
@@ -29,8 +32,10 @@ final class RequestThrottleCLI
     /**
      * Reset or remove all Request Throttles 
      * stored in database.
+     * 
+     * @return void
      */
-    public function resetAll()
+    public function resetAll(): void
     {        
         try {
             RequestsThrottling::reset();

@@ -34,7 +34,8 @@ final class APIPlugin
      */
     public $rootURL;
 
-    public function pluginInit() {
+    public function pluginInit(): void
+    {
         $this->pluginSetup();
     
         if ( ! is_admin() ) {
@@ -44,31 +45,37 @@ final class APIPlugin
         $this->admin(); 
     }
     
-    protected function init()
+    protected function init(): void
+    {        
+        add_action( 'init', [ $this, 'pluginInit' ] );
+    }
+
+    /**
+     * Register, init or set site-wide components.
+     * 
+     * @return void
+     */
+    protected function pluginSetup(): void
     {
-        // Define settings
         $this->pluginVersion = defined('JNFDEV_APIPLUGIN_VERSION') ? JNFDEV_APIPLUGIN_VERSION : '1.0.0';
         $this->rootPath      = defined('JNFDEV_APIPLUGIN_ROOT_PATH') ? JNFDEV_APIPLUGIN_ROOT_PATH : dirname( dirname( __DIR__ ) );
         $this->rootURL       = defined('JNFDEV_APIPLUGIN_ROOT_URL') ? JNFDEV_APIPLUGIN_ROOT_URL : plugin_dir_url( dirname( dirname( __DIR__ ) ) );
         $this->textdomain    = defined('JNFDEV_APIPLUGIN_TEXTDOMAIN') ? JNFDEV_APIPLUGIN_TEXTDOMAIN : 'jnfdev-apiplugin';
-        
-        add_action( 'init', [ $this, 'pluginInit' ] );
-    }
 
-    protected function pluginSetup()
-    {
-        // Load plugin textdomain.
         $pluginLangPath = $this->rootPath . '/languages/';
         load_plugin_textdomain( $this->textdomain, false, $pluginLangPath );
 
-        // Load custom block
         APIBlock::run();
 
-        // Register custom CLI commands
         class_exists( WP_CLI::class ) && WP_CLI::add_command( 'request-throttle', RequestThrottleCLI::class );
     }
 
-    protected function admin()
+    /**
+     * Register, init, or set admin components.
+     * 
+     * @return void
+     */
+    protected function admin(): void
     {
         AdminAJAXEndpoints::run();
         AdminPage::run();

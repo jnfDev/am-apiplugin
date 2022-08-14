@@ -15,9 +15,12 @@ final class AdminAJAXEndpoints
 {
     use Singleton;
 
+    /**
+     * @var string
+     */
     const NONCE_ACTION = "_wpnonce_am_apiplugin_";
 
-    protected function init()
+    protected function init(): void
     {
         if ( ! ( defined('DOING_AJAX') && DOING_AJAX ) ) {
             return;
@@ -28,6 +31,11 @@ final class AdminAJAXEndpoints
         add_action( 'wp_ajax_nopriv_am_get_challenge_data', [ $this, 'getChallengeData' ] );
     }
 
+    /**
+     * Validate AJAX request.
+     * 
+     * @return bool
+     */
     protected function validateAJAXRequest(): bool
     {
         $nonce = sanitize_key( $_POST['wpnonce'] );
@@ -38,11 +46,21 @@ final class AdminAJAXEndpoints
         return true;
     }
 
+    /**
+     * Reset all data stored in database.
+     * AJAX Callback
+     * 
+     * @return void
+     */
     public function resetAllData(): void 
     {
         try {
-            if( ! $this->validateAJAXRequest() ) {
+            if ( ! $this->validateAJAXRequest() ) {
                 throw new RequestFailedException( "Invalid AJAX Request", 1 );
+            }
+
+            if ( ! current_user_can( 'manage_options' ) ) {
+                throw new RequestFailedException( "The current user is not allowed to perform this action.", 1 );
             }
 
             FallbackResponse::reset();
@@ -57,10 +75,16 @@ final class AdminAJAXEndpoints
         } 
     }
 
+    /**
+     * Get Challenge data from API.
+     * AJAX Callback
+     * 
+     * @return void 
+     */
     public function getChallengeData(): void
     {
         try {
-            if( ! $this->validateAJAXRequest() ) {
+            if ( ! $this->validateAJAXRequest() ) {
                 throw new RequestFailedException( "Invalid AJAX Request", 1 );
             }
 

@@ -4,13 +4,49 @@ namespace Am\APIPlugin\Interfaces;
 
 interface RequestInterface
 {
-    public function get( $url, $args = [] );
+    /**
+     * Get request.
+     * 
+     * @param string $url Request's URL. 
+     * @param array $args Request's args.
+     * 
+     * @return array
+     */
+    public function get( string $url, array $args = [] ): array;
 
-    public function post( $url, $args = [] );
+    /**
+     * POST request
+     * @param string $url Request's URL. 
+     * @param array $args Request's args.
+     * 
+     * @return array
+     */
+    public function post( string $url, array $args = [] ): array;
 
-    public function put( $url, $args = [] );
+    /**
+     * PUT request
+     * @param string $url Request's URL. 
+     * @param array $args Request's args.
+     * 
+     * @return array
+     */
+    public function put( string $url, array $args = [] ): array;
 
-    public function patch( $url, $args = [] );
+    /**
+     * PATCH request
+     * @param string $url Request's URL. 
+     * @param array $args Request's args.
+     * 
+     * @return array
+     */
+    public function patch( string $url, array $args = [] ): array;
 
-    public function delete( $url, $args = [] );
+    /**
+     * DELETE request
+     * @param string $url Request's URL. 
+     * @param array $args Request's args.
+     * 
+     * @return array
+     */
+    public function delete( string $url, array $args = [] ): array;
 }

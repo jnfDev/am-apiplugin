@@ -24,7 +24,12 @@ final class AdminPage
         add_action( 'admin_menu', [ $this, 'registerMenuPage' ] );
     }
     
-    public function registerMenuPage()
+    /**
+     * Register WordPress' page menu.
+     * 
+     * @return void
+     */
+    public function registerMenuPage(): void
     {
         add_menu_page( 
             __( 'Am API-Based Plugin', $this->plugin->textdomain ), 
@@ -36,6 +41,11 @@ final class AdminPage
         );
     }
 
+    /**
+     * Render menu page content.
+     * 
+     * @return void
+     */
     public function renderMenuPage(): void
     {   
         /**
@@ -48,6 +58,11 @@ final class AdminPage
         require_once __DIR__ . '/views/admin-page.php';
     }
 
+    /**
+     * Enqueue menu page's assets.
+     * 
+     * @return void
+     */
     public function enqueueAssets(): void
     {
         $screen = get_current_screen();

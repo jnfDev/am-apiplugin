@@ -10,14 +10,13 @@ final class APIBlock
 {
     use Singleton;
 
-    public function init()
+    public function init(): void
     {
         /**
          * @var APIPlugin
          */
-        $plugin     = APIPlugin::getInstance();
-        $textdomain = $plugin->textdomain;
-        $assetFile  = require_once( $plugin->rootPath . '/build/index.asset.php' );
+        $plugin    = APIPlugin::getInstance();
+        $assetFile = require_once( $plugin->rootPath . '/build/index.asset.php' );
 
         wp_register_script(
             'am-apiblock-script',
