@@ -27,6 +27,7 @@ class Request extends WP_Http implements RequestInterface
     /**
      * @param RequestsThrottlingInterface $requestsThrottling
      * @param FallbackResponseInterface|null $fallbackResponse
+     * 
      * @return void
      */
     public function __construct(
