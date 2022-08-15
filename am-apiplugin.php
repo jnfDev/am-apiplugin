@@ -17,10 +17,8 @@ if ( ! class_exists( APIPlugin::class ) && is_readable( __DIR__ . '/vendor/autol
 /**
  * Define consts
  */
-define( 'JNFDEV_APIPLUGIN_VERSION', '1.0.0' );
-define( 'JNFDEV_APIPLUGIN_ROOT_PATH', __DIR__ );
-define( 'JNFDEV_APIPLUGIN_ROOT_URL', plugin_dir_url( __FILE__ ) );
-define( 'JNFDEV_APIPLUGIN_TEXTDOMAIN', 'jnfdev-apiplugin' );
+define( 'AM_APIPLUGIN_SLUG', 'am-apiplugin' );
+define( 'AM_APIPLUGIN_VERSION', '1.0.0' );
 
 function am_apiplugin_init() {
     if ( ! class_exists( APIPlugin::class ) ) {

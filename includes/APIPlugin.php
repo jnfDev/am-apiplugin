@@ -15,9 +15,9 @@ final class APIPlugin
     use Singleton;
 
     /**
-     * @var string Plugin's textdomain.
+     * @var string Plugin's slug.
      */
-    public $textdomain;
+    public $pluginSlug;
 
     /**
      * @var string Plugin's version.
@@ -57,13 +57,13 @@ final class APIPlugin
      */
     protected function pluginSetup(): void
     {
-        $this->pluginVersion = defined('JNFDEV_APIPLUGIN_VERSION') ? JNFDEV_APIPLUGIN_VERSION : '1.0.0';
-        $this->rootPath      = defined('JNFDEV_APIPLUGIN_ROOT_PATH') ? JNFDEV_APIPLUGIN_ROOT_PATH : dirname( dirname( __DIR__ ) );
-        $this->rootURL       = defined('JNFDEV_APIPLUGIN_ROOT_URL') ? JNFDEV_APIPLUGIN_ROOT_URL : plugin_dir_url( dirname( dirname( __DIR__ ) ) );
-        $this->textdomain    = defined('JNFDEV_APIPLUGIN_TEXTDOMAIN') ? JNFDEV_APIPLUGIN_TEXTDOMAIN : 'jnfdev-apiplugin';
+        $this->pluginVersion = defined('AM_APIPLUGIN_VERSION') ? AM_APIPLUGIN_VERSION : '1.0.0';
+        $this->pluginSlug    = defined('AM_APIPLUGIN_SLUG') ? AM_APIPLUGIN_SLUG : 'am-apiplugin';
+        $this->rootPath      = dirname( __DIR__ );
+        $this->rootURL       = plugin_dir_url( $this->rootPath . "/{$this->pluginSlug}.php" );
 
         $pluginLangPath = $this->rootPath . '/languages/';
-        load_plugin_textdomain( $this->textdomain, false, $pluginLangPath );
+        load_plugin_textdomain( $this->pluginSlug, false, $pluginLangPath );
 
         APIBlock::run();
 

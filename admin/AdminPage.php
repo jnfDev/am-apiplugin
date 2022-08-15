@@ -32,8 +32,8 @@ final class AdminPage
     public function registerMenuPage(): void
     {
         add_menu_page( 
-            __( 'Am API-Based Plugin', $this->plugin->textdomain ), 
-            __( 'Am API-Based Plugin', $this->plugin->textdomain ), 
+            __( 'Am API-Based Plugin', 'am-apiplugin' ), 
+            __( 'Am API-Based Plugin', 'am-apiplugin' ), 
             'manage_options', 
             'am-admin-page', 
             [ $this, 'renderMenuPage' ], 
@@ -51,9 +51,8 @@ final class AdminPage
         /**
          * View's variables 
          */
-        $assetUrl     = $this->plugin->rootURL . '/admin/assets';
-        $textdomain   = $this->plugin->textdomain;
         $challengeIds = [1];
+        $assetUrl     = $this->plugin->rootURL . '/admin/assets';
 
         require_once __DIR__ . '/views/admin-page.php';
     }
@@ -75,7 +74,7 @@ final class AdminPage
         wp_enqueue_script( $scriptHandle, $this->plugin->rootURL . '/admin/assets/js/admin-page.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion );
         wp_enqueue_style( 'admin-page-styles', $this->plugin->rootURL . '/admin/assets/css/admin-page.css', [], $this->plugin->pluginVersion );
         
-        wp_set_script_translations( $scriptHandle,  $this->plugin->textdomain );
+        wp_set_script_translations( $scriptHandle,  'am-apiplugin' );
         
         wp_localize_script( 
             $scriptHandle,
@@ -83,7 +82,6 @@ final class AdminPage
             [
                 'url'        => admin_url( 'admin-ajax.php' ),
                 'nonce'      => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
-                'textdomain' => $this->plugin->textdomain
             ]
         );
     }

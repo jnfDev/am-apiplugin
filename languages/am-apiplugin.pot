@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-06T22:28:09+00:00\n"
+"POT-Creation-Date: 2022-08-15T19:00:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: am-apiplugin\n"
@@ -18,6 +18,124 @@ msgstr ""
 msgid "Am API Based Plugin"
 msgstr ""
 
+#. Description of the plugin
+msgid "This plugin is an application test (code challenge) for Awesome Motive."
+msgstr ""
+
 #. Author of the plugin
 msgid "jnfdev"
+msgstr ""
+
+#: admin/AdminPage.php:35
+#: admin/AdminPage.php:36
+msgid "Am API-Based Plugin"
+msgstr ""
+
+#: admin/views/admin-page.php:13
+msgid "API-Based Plugin"
+msgstr ""
+
+#: admin/views/admin-page.php:17
+msgid "Challenge"
+msgstr ""
+
+#: admin/views/admin-page.php:20
+msgid "Reset"
+msgstr ""
+
+#: admin/views/admin-page.php:30
+msgid "Select challenge:"
+msgstr ""
+
+#: admin/views/admin-page.php:43
+msgid "Refresh Data"
+msgstr ""
+
+#: admin/views/admin-page.php:48
+msgid "Reset or delete all the data store by the plugin on the options table."
+msgstr ""
+
+#: admin/views/admin-page.php:49
+msgid "The next data will be delete:"
+msgstr ""
+
+#: admin/views/admin-page.php:52
+msgid "Requests Throttling:"
+msgstr ""
+
+#: admin/views/admin-page.php:53
+msgid "This is the mechanism used by the plugin to limit the number of requests in a certain time."
+msgstr ""
+
+#: admin/views/admin-page.php:54
+msgid "This class implements transient to create a temporal flag, so data is stored on the options table."
+msgstr ""
+
+#: admin/views/admin-page.php:57
+msgid "Fallback Response:"
+msgstr ""
+
+#: admin/views/admin-page.php:58
+msgid "This is the way the plugin ensures every request gets an answer even if the API Endpoint is \"throttling\"."
+msgstr ""
+
+#: admin/views/admin-page.php:59
+msgid "This class implements transient to create a temporal variable, so data is stored on the options table."
+msgstr ""
+
+#: admin/views/admin-page.php:62
+msgid "Reset All Data Stored"
+msgstr ""
+
+#: admin/assets/js/admin-page.js:61
+#: admin/assets/js/admin-page.js:90
+msgid "Something went wrong."
+msgstr ""
+
+#: admin/assets/js/admin-page.js:65
+msgid "All data was successfully reset."
+msgstr ""
+
+#: admin/assets/js/admin-page.js:105
+msgid "ID:"
+msgstr ""
+
+#: admin/assets/js/admin-page.js:106
+msgid "Email:"
+msgstr ""
+
+#: admin/assets/js/admin-page.js:107
+msgid "Date:"
+msgstr ""
+
+#: admin/assets/js/admin-page.js:141
+msgid "Data fetched."
+msgstr ""
+
+#: build/index.js:1
+#: src/components/ColumnsVisibility/ColumnsVisibility.js:12
+msgid "Hide %s"
+msgstr ""
+
+#: build/index.js:1
+#: src/components/Error/Error.js:7
+msgid "505 Error"
+msgstr ""
+
+#: build/index.js:1
+#: src/components/Error/Error.js:10
+msgid "Something unexpected just happened. Try to reload the page."
+msgstr ""
+
+#: build/index.js:1
+#: src/components/Loading/Loading.js:8
+msgid "Loading..."
+msgstr ""
+
+#: src/components/ColumnsVisibility/ColumnsVisibility.js:15
+msgid "Hidden"
+msgstr ""
+
+#: src/components/ColumnsVisibility/ColumnsVisibility.js:16
+msgid "Visible"
 msgstr ""

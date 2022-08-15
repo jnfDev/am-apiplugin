@@ -15,15 +15,18 @@ final class APIBlock
         /**
          * @var APIPlugin
          */
-        $plugin    = APIPlugin::getInstance();
-        $assetFile = require_once( $plugin->rootPath . '/build/index.asset.php' );
+        $plugin       = APIPlugin::getInstance();
+        $assetFile    = require_once( $plugin->rootPath . '/build/index.asset.php' );
+        $scriptHandle = 'am-apiblock-script';
 
         wp_register_script(
-            'am-apiblock-script',
+            $scriptHandle,
             $plugin->rootURL . '/build/index.js',
-            $assetFile['dependencies'],
+            array_merge( $assetFile['dependencies'], ['wp-i18n'] ),
             $assetFile['version']
         );
+
+        wp_set_script_translations( $scriptHandle,  'am-apiplugin' );
 
         wp_register_style(
             'am-apiblock-style',

@@ -42,7 +42,7 @@ const AmAdminPage = {
     resetAllData: function(e) {
         const $elm = jQuery(e.target);
         const { __ } = this.i18n;
-        const { url: ajaxUrl, nonce, textdomain } = this.adminVars;
+        const { url: ajaxUrl, nonce } = this.adminVars;
 
         this.toggleLoading($elm);
 
@@ -58,18 +58,18 @@ const AmAdminPage = {
                 this.toggleLoading($elm);
 
                 if (!success) {
-                    alert(__('Something went wrong.', textdomain));
+                    alert(__('Something went wrong.', 'am-apiplugin'));
                     console.error('Failed AJAX request.');
                 }
 
-                alert(__('All data was successfully reset.', textdomain))
+                alert(__('All data was successfully reset.', 'am-apiplugin'))
             }
         );
     },
 
     fetchChallenge: function(e) {
         const { __ } = this.i18n;
-        const { url: ajaxUrl, nonce, textdomain } = this.adminVars;
+        const { url: ajaxUrl, nonce } = this.adminVars;
         const challengeId = jQuery('#am-select-challenge').val();
 
         return new Promise((resolve) => {
@@ -87,7 +87,7 @@ const AmAdminPage = {
                     $challengeContent.html('');
     
                     if (!success || !data) {
-                        alert(__('Something went wrong.', textdomain));
+                        alert(__('Something went wrong.', 'am-apiplugin'));
                         console.error('Wrong AJAX response.');
                     }
         
@@ -102,9 +102,9 @@ const AmAdminPage = {
                         const output = `
                             <div>${row.fname} ${row.lname}</div>
                             <div>
-                                <p><b>${__(`ID:`, textdomain)}</b> ${id}</p>
-                                <p><b>${__(`Email:`, textdomain)}</b> ${email}</p>
-                                <p><b>${__(`Date:`, textdomain)}</b> ${date}</p>
+                                <p><b>${__(`ID:`, 'am-apiplugin')}</b> ${id}</p>
+                                <p><b>${__(`Email:`, 'am-apiplugin')}</b> ${email}</p>
+                                <p><b>${__(`Date:`, 'am-apiplugin')}</b> ${date}</p>
                             </div>
                         `;
     
@@ -125,7 +125,6 @@ const AmAdminPage = {
 
     init: function() {
         const { __ } = this.i18n;
-        const { textdomain } = this.adminVars;
 
         this.bindings();
         this.fetchChallenge();
@@ -139,7 +138,7 @@ const AmAdminPage = {
             this.toggleLoading($elm);
             this.fetchChallenge().then(() => {
                 this.toggleLoading($elm);
-                alert(__('Data fetched.', textdomain))
+                alert(__('Data fetched.', 'am-apiplugin'))
             });
         });
     }

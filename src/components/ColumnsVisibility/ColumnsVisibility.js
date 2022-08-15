@@ -2,17 +2,18 @@ import { ToggleControl } from '@wordpress/components';
 import './ColumnsVisibility.scss';
 
 export const ColumnsVisibility = ({ columns = [], setHiddenColumns, hiddenColumns = [] }) => {
+    const { __, sprintf } = wp.i18n;
     return (
         <div className='Am-ColumnsVisibility'>
             {columns.map((col, index) => {
                 const isHidden = hiddenColumns.includes(`column_${index}`);
                 return (
                     <ToggleControl
-                        label={`Hide ${col}`}
+                        label={sprintf(__('Hide %s', 'am-apiplugin'), col)}
                         help={
                             isHidden
-                                ? 'Hidden'
-                                : 'Visible'
+                                ? __('Hidden', 'am-apiplugin')
+                                : __('Visible', 'am-apiplugin')
                         }
                         checked={isHidden}
                         onChange={checked => {
