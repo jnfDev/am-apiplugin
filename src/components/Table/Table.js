@@ -3,6 +3,10 @@ import './Table.scss';
 export const Table = ({ data, hiddenColumns = [] }) => {
     const { title, data: table } = data;
 
+    const dateIndex = table.headers.reduce((_default, col, index) => {
+        return ('Date' === col) ? index : _default;
+    }, -1);
+
     return (
         <div className="Table">
             <h4>{title}</h4>
@@ -27,7 +31,11 @@ export const Table = ({ data, hiddenColumns = [] }) => {
                             <tr>
                                 {Object.values(row)
                                 .filter((col, index) => ! hiddenColumns.includes(`column_${index}`))
-                                .map((col) => {
+                                .map((col, index) => {
+                                    // Let's format any "Date" column
+                                    if (index === dateIndex) {
+                                        col = (new Date(col)).toLocaleDateString();
+                                    }
                                     return <td>{col}</td>
                                 })}
                             </tr>

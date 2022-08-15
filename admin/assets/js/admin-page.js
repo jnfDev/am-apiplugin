@@ -95,12 +95,16 @@ const AmAdminPage = {
                     const rows = Object.values(tableData?.rows || {});
     
                     rows.forEach(function(row){
+                        const id = row.id;
+                        const email = row.email;
+                        const date = (new Date(row.date)).toLocaleDateString();
+
                         const output = `
                             <div>${row.fname} ${row.lname}</div>
                             <div>
-                                <p><b>${__(`ID:`, textdomain)}</b> ${row.id}</p>
-                                <p><b>${__(`Email:`, textdomain)}</b> ${row.email}</p>
-                                <p><b>${__(`Date:`, textdomain)}</b> ${row.date}</p>
+                                <p><b>${__(`ID:`, textdomain)}</b> ${id}</p>
+                                <p><b>${__(`Email:`, textdomain)}</b> ${email}</p>
+                                <p><b>${__(`Date:`, textdomain)}</b> ${date}</p>
                             </div>
                         `;
     
