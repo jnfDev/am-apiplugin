@@ -2,9 +2,6 @@
 
 namespace Am\APIPlugin;
 
-use WP_CLI;
-use Am\APIPlugin\CLI\RequestThrottleCLI;
-use Am\APIPlugin\APIBlock;
 use Am\APIPlugin\Admin\AdminAJAXEndpoints;
 use Am\APIPlugin\Admin\AdminPage;
 
@@ -64,10 +61,6 @@ final class APIPlugin
 
         $pluginLangPath = $this->rootPath . '/languages/';
         load_plugin_textdomain( $this->pluginSlug, false, $pluginLangPath );
-
-        APIBlock::run();
-
-        class_exists( WP_CLI::class ) && WP_CLI::add_command( 'request-throttle', RequestThrottleCLI::class );
     }
 
     /**

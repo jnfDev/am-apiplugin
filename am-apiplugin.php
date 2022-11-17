@@ -18,7 +18,7 @@ if ( ! class_exists( APIPlugin::class ) && is_readable( __DIR__ . '/vendor/autol
  * Define consts
  */
 define( 'AM_APIPLUGIN_SLUG', 'am-apiplugin' );
-define( 'AM_APIPLUGIN_VERSION', '1.0.0' );
+define( 'AM_APIPLUGIN_VERSION', '2.0.0' );
 
 function am_apiplugin_init() {
     if ( ! class_exists( APIPlugin::class ) ) {
