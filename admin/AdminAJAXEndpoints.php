@@ -72,7 +72,7 @@ final class AdminAJAXEndpoints
                     if ( ! $isThrottling ) {
                         $rawResponse = wp_remote_get( $apiEndpoint );
 
-                        if ( 200 !== $rawResponse['code'] ) {
+                        if ( 200 !== $rawResponse['response']['code'] ) {
                             throw new RequestFailedException( "Request Failed." );
                         }
 
