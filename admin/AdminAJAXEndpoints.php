@@ -19,13 +19,18 @@ final class AdminAJAXEndpoints
      */
     const NONCE_ACTION = "_wpnonce_am_apiplugin_";
 
+    /**
+     * @var string
+     */
+    const AJAX_DATA_ENDPOINT_ACTION = "am_api_data_endpoint";
+
     protected function init(): void
     {
         if ( ! ( defined('DOING_AJAX') && DOING_AJAX ) ) {
             return;
         }
 
-        add_action( 'wp_ajax_am_api_data_endpoint', [ $this, 'ajaxDataEndpoint' ] );
+        add_action( "wp_ajax_" . self::AJAX_DATA_ENDPOINT_ACTION, [ $this, 'ajaxDataEndpoint' ] );
     }
 
     /**
