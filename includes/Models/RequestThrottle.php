@@ -20,7 +20,7 @@ class RequestThrottle
         $this->experitation = $experitation;
     }
 
-    public function __invoke( string $endpointURL, callable $fn): mixed
+    public function __invoke( string $endpointURL, callable $fn)
     {
         if ( empty( $endpointURL ) || false === filter_var( $endpointURL, FILTER_VALIDATE_URL ) ) {
             throw new InvalidURLException();
