@@ -10,6 +10,11 @@ final class RequestThrottleTest extends TestCase
 
     private const TOO_MANY_REQUESTS = 429;
 
+    protected function setUp(): void
+    {
+        RequestThrottle::reset();
+    }
+
     public function testCanDoRequestThrottling() 
     {
         $validEndpoint   = 'https://miusage.com/v1/challenge/2/static/';  
