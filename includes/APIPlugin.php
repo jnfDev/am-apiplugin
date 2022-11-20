@@ -31,6 +31,11 @@ final class APIPlugin
      */
     public $rootURL;
 
+    /**
+     * @var string Plugin's settings key (store on wp_options table) 
+     */
+    public const SETTINGS_OPTION_KEY = "test_project_option";
+
     public function pluginInit(): void
     {
         $this->pluginSetup();
