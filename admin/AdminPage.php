@@ -69,20 +69,21 @@ final class AdminPage
             return;
         }
 
-        // $scriptHandle = 'admin-page-script';
+        $scriptHandle = 'admin-page-script';
+        $scriptHandle = 'am-admin-page-script';
         
-        // wp_enqueue_script( $scriptHandle, $this->plugin->rootURL . '/admin/assets/js/admin-page.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion );
-        // wp_enqueue_style( 'admin-page-styles', $this->plugin->rootURL . '/admin/assets/css/admin-page.css', [], $this->plugin->pluginVersion );
+        wp_enqueue_script( $scriptHandle, $this->plugin->rootURL . '/admin/assets/js/admin-page.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion );
+
+        wp_set_script_translations( $scriptHandle,  'am-apiplugin' );
         
-        // wp_set_script_translations( $scriptHandle,  'am-apiplugin' );
-        
-        // wp_localize_script( 
-        //     $scriptHandle,
-        //     'adminVars', 
-        //     [
-        //         'url'        => admin_url( 'admin-ajax.php' ),
-        //         'nonce'      => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
-        //     ]
-        // );
+        wp_localize_script( 
+            $scriptHandle,
+            'AmAdminVars', 
+            [
+                'action'     => AdminAJAXEndpoints::AJAX_DATA_ENDPOINT_ACTION,
+                'url'        => admin_url( 'admin-ajax.php' ),
+                'nonce'      => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
+            ]
+        );
     }
 }
