@@ -3,10 +3,9 @@
 namespace Am\APIPlugin\Admin;
 
 use Exception;
-use Am\APIPlugin\Models\FallbackResponse;
-use Am\APIPlugin\Models\RequestsThrottling;
-use Am\APIPlugin\Models\APIRequest;
 use Am\APIPlugin\Singleton;
+use Am\APIPlugin\Models\RequestThrottle;
+use Am\APIPlugin\Exceptions\EmptyFallbackResponseException;
 use Am\APIPlugin\Exceptions\RequestFailedException;
 
 defined( 'ABSPATH' ) || exit;
@@ -26,9 +25,7 @@ final class AdminAJAXEndpoints
             return;
         }
 
-        add_action( 'wp_ajax_am_reset_all_data', [ $this, 'resetAllData' ] );
-        add_action( 'wp_ajax_am_get_challenge_data', [ $this, 'getChallengeData' ] );
-        add_action( 'wp_ajax_nopriv_am_get_challenge_data', [ $this, 'getChallengeData' ] );
+        add_action( 'wp_ajax_am_api_data_endpoint', [ $this, 'ajaxDataEndpoint' ] );
     }
 
     /**
@@ -42,37 +39,12 @@ final class AdminAJAXEndpoints
         if ( ! wp_verify_nonce( $nonce, self::NONCE_ACTION  ) ) {
             return false;
         }
-        
+
+        if ( ! in_array('administrator',  wp_get_current_user()->roles ) ) {
+            return false;
+        }
+
         return true;
-    }
-
-    /**
-     * Reset all data stored in database.
-     * AJAX Callback
-     * 
-     * @return void
-     */
-    public function resetAllData(): void 
-    {
-        try {
-            if ( ! $this->validateAJAXRequest() ) {
-                throw new RequestFailedException( "Invalid AJAX Request", 1 );
-            }
-
-            if ( ! current_user_can( 'manage_options' ) ) {
-                throw new RequestFailedException( "The current user is not allowed to perform this action.", 1 );
-            }
-
-            FallbackResponse::reset();
-            RequestsThrottling::reset();
-
-            wp_send_json_success();
-
-        } catch ( Exception $e ) {
-            wp_send_json_error([
-                'error_message' => $e->getMessage()
-            ]);
-        } 
     }
 
     /**
@@ -81,20 +53,44 @@ final class AdminAJAXEndpoints
      * 
      * @return void 
      */
-    public function getChallengeData(): void
+    public function ajaxDataEndpoint(): void
     {
         try {
             if ( ! $this->validateAJAXRequest() ) {
                 throw new RequestFailedException( "Invalid AJAX Request", 1 );
             }
 
-            $resourceId = (int) $_POST['challenge_id'];
-            if ( empty( $resourceId ) ) {
-                throw new RequestFailedException( "Missing challenge ID param", 1 );
-            }
+            $baseUrl     = 'https://miusage.com';
+            $pathURL     = 'v1/challenge/2/static/';
+            $apiEndpoint = "{$baseUrl}/{$pathURL}";
 
-            $apiRequest = new APIRequest();
-            $apiData    = $apiRequest->getChallengeById( $resourceId );
+            $apiData = ( new RequestThrottle() )->__invoke( 
+                $baseUrl, 
+                function( $isThrottling ) use ( $apiEndpoint ) {
+                    $fallbackResponseKey = 'am_api_data_endpoint';
+
+                    if ( ! $isThrottling ) {
+                        $rawResponse = wp_remote_get( $apiEndpoint );
+
+                        if ( 200 !== $rawResponse['code'] ) {
+                            throw new RequestFailedException( "Request Failed." );
+                        }
+
+                        $response = $rawResponse['body'];
+
+                        update_option( $fallbackResponseKey, $response );
+                        return $response;
+                    }
+
+                    $fallbackResponse = get_option( 'am_api_data_endpoint' );
+
+                    if ( empty( $fallbackResponse ) ) {
+                        throw new EmptyFallbackResponseException();
+                    }
+
+                    return $fallbackResponse;
+                }
+            );
 
             wp_send_json_success( $apiData );
 
