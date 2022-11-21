@@ -8,6 +8,8 @@
  */
 namespace Am\APIPlugin;
 
+use Am\APIPlugin\Models\AdminSettings;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( APIPlugin::class ) && is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -20,11 +22,8 @@ if ( ! class_exists( APIPlugin::class ) && is_readable( __DIR__ . '/vendor/autol
 define( 'AM_APIPLUGIN_SLUG', 'am-apiplugin' );
 define( 'AM_APIPLUGIN_VERSION', '2.0.0' );
 
-/**
- * The code that runs during plugin activation.
- */
 register_activation_hook( __FILE__, function() {
-    Installer::run();
+    AdminSettings::getInstance()->restore();
 } );
 
 function am_apiplugin_init() {
