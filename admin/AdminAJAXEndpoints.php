@@ -7,6 +7,7 @@ use Am\APIPlugin\Singleton;
 use Am\APIPlugin\Models\RequestThrottle;
 use Am\APIPlugin\Exceptions\EmptyFallbackResponseException;
 use Am\APIPlugin\Exceptions\RequestFailedException;
+use Am\APIPlugin\Models\AdminSettings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,12 +18,17 @@ final class AdminAJAXEndpoints
     /**
      * @var string
      */
-    const NONCE_ACTION = "_wpnonce_am_apiplugin_";
+    const NONCE_ACTION = '_wpnonce_am_apiplugin_';
 
     /**
      * @var string
      */
-    const AJAX_DATA_ENDPOINT_ACTION = "am_api_data_endpoint";
+    const AJAX_GET_API_DATA_ACTION = 'am_get_api_data_endpoint';
+
+    /**
+     * @var string
+     */
+    const AJAX_UPDATE_SETTING_ACTION = 'am_update_setting_endpoint';
 
     protected function init(): void
     {
@@ -30,7 +36,8 @@ final class AdminAJAXEndpoints
             return;
         }
 
-        add_action( "wp_ajax_" . self::AJAX_DATA_ENDPOINT_ACTION, [ $this, 'ajaxDataEndpoint' ] );
+        add_action( 'wp_ajax_' . self::AJAX_GET_API_DATA_ACTION, [ $this, 'ajaxGetApiData' ] );
+        add_action( 'wp_ajax_' . self::AJAX_UPDATE_SETTING_ACTION, [ $this, 'ajaxUpdateSetting' ]);
     }
 
     /**
@@ -58,7 +65,7 @@ final class AdminAJAXEndpoints
      * 
      * @return void 
      */
-    public function ajaxDataEndpoint(): void
+    public function ajaxGetApiData(): void
     {
         try {
             if ( ! $this->validateAJAXRequest() ) {
@@ -98,6 +105,28 @@ final class AdminAJAXEndpoints
             );
 
             wp_send_json_success( $apiData );
+
+        } catch ( Exception $e ) {
+            wp_send_json_error([
+                'error_message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function ajaxUpdateSetting(): void
+    {
+        try {
+            if ( ! $this->validateAJAXRequest() ) {
+                throw new RequestFailedException( "Invalid AJAX Request", 1 );
+            }
+
+            // We're letting the responsibility of sanitizing and validating
+            // to the AdminSettings class, so we don't need to do nothing more here.
+            $settingName  = $_POST['name'];
+            $settingValue = $_POST['value'];
+
+            AdminSettings::getInstance()->set( $settingName, $settingValue );
+            wp_send_json_success();
 
         } catch ( Exception $e ) {
             wp_send_json_error([
