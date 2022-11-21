@@ -28,6 +28,11 @@ final class AdminAJAXEndpoints
     /**
      * @var string
      */
+    const AJAX_GET_SETTINGS_ACTION = 'am_get_settings_endpoint';
+
+    /**
+     * @var string
+     */
     const AJAX_UPDATE_SETTING_ACTION = 'am_update_setting_endpoint';
 
     protected function init(): void
@@ -38,6 +43,7 @@ final class AdminAJAXEndpoints
 
         add_action( 'wp_ajax_' . self::AJAX_GET_API_DATA_ACTION, [ $this, 'ajaxGetApiData' ] );
         add_action( 'wp_ajax_' . self::AJAX_UPDATE_SETTING_ACTION, [ $this, 'ajaxUpdateSetting' ]);
+        add_action( 'wp_ajax_' . self::AJAX_GET_SETTINGS_ACTION, [ $this, 'ajaxGetSettings' ] );
     }
 
     /**
@@ -127,6 +133,23 @@ final class AdminAJAXEndpoints
 
             AdminSettings::getInstance()->set( $settingName, $settingValue );
             wp_send_json_success();
+
+        } catch ( Exception $e ) {
+            wp_send_json_error([
+                'error_message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function ajaxGetSettings(): void
+    {
+        try {
+            if ( ! $this->validateAJAXRequest() ) {
+                throw new RequestFailedException( "Invalid AJAX Request", 1 );
+            }
+
+            $settings = AdminSettings::getInstance()->get();
+            wp_send_json_success( $settings );
 
         } catch ( Exception $e ) {
             wp_send_json_error([
