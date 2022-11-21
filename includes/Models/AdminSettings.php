@@ -14,15 +14,9 @@ class AdminSettings
 
     private const OPTION_KEY = 'test_project_option';
 
-    /**
-     * @var array
-     */
-    private $settings;
+    private array $settings;
 
-    /**
-     * @var array
-     */
-    private $settingsBlueprint;
+    private array $settingsBlueprint;
 
     protected function init(): void
     {

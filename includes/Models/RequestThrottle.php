@@ -9,9 +9,9 @@ defined( 'ABSPATH' ) || exit;
 
 class RequestThrottle
 {
-    private $requestThrottleKey;
+    private string $requestThrottleKey;
 
-    private $experitation;
+    private int $experitation;
 
     private const PREFIX = 'request_throttle_';
 

@@ -46,11 +46,6 @@ final class AdminAJAXEndpoints
         add_action( 'wp_ajax_' . self::AJAX_GET_SETTINGS_ACTION, [ $this, 'ajaxGetSettings' ] );
     }
 
-    /**
-     * Validate AJAX request.
-     * 
-     * @return bool
-     */
     protected function validateAJAXRequest(): bool
     {
         $nonce = sanitize_key( $_POST['wpnonce'] );
@@ -65,12 +60,6 @@ final class AdminAJAXEndpoints
         return true;
     }
 
-    /**
-     * Get Challenge data from API.
-     * AJAX Callback
-     * 
-     * @return void 
-     */
     public function ajaxGetApiData(): void
     {
         try {
@@ -91,7 +80,7 @@ final class AdminAJAXEndpoints
                         $rawResponse = wp_remote_get( $apiEndpoint );
 
                         if ( 200 !== $rawResponse['response']['code'] ) {
-                            throw new RequestFailedException( "Request Failed." );
+                            throw new RequestFailedException();
                         }
 
                         $response = $rawResponse['body'];

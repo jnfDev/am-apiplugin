@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
 class WpdbNotDefinedException extends Exception {
 
     public function __construct(
-        string $message = "Wpdb is not defined.", 
+        string $message = "Wpdb is not defined", 
         int $code = 0, 
         Throwable $previous = null
     ) {

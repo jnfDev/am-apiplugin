@@ -11,30 +11,18 @@ final class APIPlugin
 {
     use Singleton;
 
-    /**
-     * @var string Plugin's slug.
-     */
-    public $pluginSlug;
+    public string $pluginSlug;
 
-    /**
-     * @var string Plugin's version.
-     */
-    public $pluginVersion;
+    public string $pluginVersion;
 
-    /**
-     * @var string Plguin's root path
-     */
-    public $rootPath;
+    public string $rootPath;
 
-    /**
-     * @var string Plugin's root URL
-     */
-    public $rootURL;
+    public string $rootURL;
 
-    /**
-     * @var string Plugin's settings key (store on wp_options table) 
-     */
-    public const SETTINGS_OPTION_KEY = "test_project_option";
+    protected function init(): void
+    {        
+        add_action( 'init', [ $this, 'pluginInit' ] );
+    }
 
     public function pluginInit(): void
     {
@@ -46,17 +34,7 @@ final class APIPlugin
     
         $this->admin(); 
     }
-    
-    protected function init(): void
-    {        
-        add_action( 'init', [ $this, 'pluginInit' ] );
-    }
 
-    /**
-     * Register, init or set site-wide components.
-     * 
-     * @return void
-     */
     protected function pluginSetup(): void
     {
         $this->pluginVersion = defined('AM_APIPLUGIN_VERSION') ? AM_APIPLUGIN_VERSION : '1.0.0';
@@ -68,11 +46,6 @@ final class APIPlugin
         load_plugin_textdomain( $this->pluginSlug, false, $pluginLangPath );
     }
 
-    /**
-     * Register, init, or set admin components.
-     * 
-     * @return void
-     */
     protected function admin(): void
     {
         AdminAJAXEndpoints::run();

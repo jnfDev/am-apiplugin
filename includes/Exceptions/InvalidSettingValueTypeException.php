@@ -3,7 +3,18 @@
 namespace Am\APIPlugin\Exceptions;
 
 use Exception;
+use Throwable;
 
 defined( 'ABSPATH' ) || exit;
 
-class InvalidSettingValueTypeException extends Exception { }
+class InvalidSettingValueTypeException extends Exception {
+    
+    public function __construct(
+        $message = "Invalid Setting Value Type",
+        int $code = 0,
+        Throwable $previous = null
+    ) {
+        parent::__construct( $message, $code, $previous );
+    }
+
+}

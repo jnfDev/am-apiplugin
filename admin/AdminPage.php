@@ -11,10 +11,7 @@ final class AdminPage
 {
     use Singleton;
 
-    /**
-     * @var APIPlugin
-     */
-    protected $plugin;
+    protected APIPlugin $plugin;
     
     protected function init()
     {
@@ -24,11 +21,6 @@ final class AdminPage
         add_action( 'admin_menu', [ $this, 'registerMenuPage' ] );
     }
     
-    /**
-     * Register WordPress' page menu.
-     * 
-     * @return void
-     */
     public function registerMenuPage(): void
     {
         add_menu_page( 
@@ -41,11 +33,6 @@ final class AdminPage
         );
     }
 
-    /**
-     * Render menu page content.
-     * 
-     * @return void
-     */
     public function renderMenuPage(): void
     {   
         /**
@@ -57,11 +44,6 @@ final class AdminPage
         require_once __DIR__ . '/views/admin-page.php';
     }
 
-    /**
-     * Enqueue menu page's assets.
-     * 
-     * @return void
-     */
     public function enqueueAssets(): void
     {
         $screen = get_current_screen();
@@ -80,9 +62,13 @@ final class AdminPage
             $scriptHandle,
             'AmAdminVars', 
             [
-                'action'     => AdminAJAXEndpoints::AJAX_DATA_ENDPOINT_ACTION,
-                'url'        => admin_url( 'admin-ajax.php' ),
-                'nonce'      => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
+                'url'                   => admin_url( 'admin-ajax.php' ),
+                'nonce'                 => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
+                'actions'               => [
+                    'get_api_data'   => AdminAJAXEndpoints::AJAX_GET_API_DATA_ACTION,
+                    'update_setting' => AdminAJAXEndpoints::AJAX_UPDATE_SETTING_ACTION,
+                    'get_settings'   => AdminAJAXEndpoints::AJAX_GET_SETTINGS_ACTION,
+                ],
             ]
         );
     }
