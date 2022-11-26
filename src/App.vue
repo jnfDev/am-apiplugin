@@ -1,9 +1,19 @@
 <script setup>
-  // JavaScript Here..
+  import { RouterView } from 'vue-router';
 </script>
-
 <template>
-  <h1>Hello World</h1>
+  <header>
+    <nav>
+      <RouterLink to="/">Table</RouterLink>
+      <RouterLink to="/graph">Graph</RouterLink>
+      <RouterLink to="/settings">Settings</RouterLink>
+    </nav>
+  </header>
+
+  <main>
+    <RouterView />
+  </main>
+
 </template>
 
 <style scoped>
