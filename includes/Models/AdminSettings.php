@@ -4,7 +4,6 @@ namespace Am\APIPlugin\Models;
 
 use Am\APIPlugin\Singleton;
 use Am\APIPlugin\Exceptions\InvalidSettingNameException;
-use Am\APIPlugin\Exceptions\InvalidSettingValueTypeException;
 use Am\APIPlugin\Exceptions\InvalidSettingValueException;
 use Am\APIPlugin\Exceptions\UpdateSettingException;
 
@@ -22,24 +21,22 @@ class AdminSettings
     {
         $this->settingsBlueprint = [
             'numrows' => [
-                'type'       => 'integer',
                 'sanitize'   => function( $value ) {
                     return (int) $value;
                 },
                 'validate'   => function( $value ) {
                     return $value > 0 && $value <= 5;
                 },
+                'error_message' => __( 'Numrows must be a valid number between 1 and 5', 'am-apiplugin' ),
                 'default'  => 5
             ],
             'humandate' => [ 
-                'type'    => 'boolean',
                 'sanitize'   => function( $value ) {
                     return (bool) $value;
                 },
                 'default' => true
             ],
             'emails' => [
-                'type'       => 'array',
                 'sanitize'   => function( $value ) {
                     return array_map( 'sanitize_email', $value );
                 },
@@ -56,6 +53,7 @@ class AdminSettings
 
                     return true;
                 },
+                'error_message' => __( 'Emails must be a list of valid emails', 'am-apiplugin' ),
                 'default' => [
                     get_option('admin_email')
                 ]
@@ -78,21 +76,21 @@ class AdminSettings
             throw new InvalidSettingNameException();
         }
 
-        if ( gettype( $value ) !== $this->settingsBlueprint[ $name ]['type'] ) {
-            throw new InvalidSettingValueTypeException();
-        }
+        $sanitize = $this->settingsBlueprint[ $name ]['sanitize'];
+        $value = $sanitize($value);
 
-        if ( isset( $this->settingsBlueprint[$name]['validate'] ) && 
-             ! $this->settingsBlueprint[$name]['validate']($value) ) 
-        {
-            throw new InvalidSettingValueException();
+        if ( isset( $this->settingsBlueprint[ $name ]['validate'] ) && 
+             ! $this->settingsBlueprint[ $name ]['validate']( $value ) 
+        ) {
+            $errorMessage = $this->settingsBlueprint[ $name ]['error_message'];
+            throw new InvalidSettingValueException( $errorMessage );
         }
 
         if ( $this->settings[ $name ] === $value ) {
             return;
         }
 
-        $this->settings[ $name ] = $this->settingsBlueprint[$name]['sanitize']($value);
+        $this->settings[ $name ] = $value;
         if ( ! update_option( self::OPTION_KEY, $this->settings ) ) {
             throw new UpdateSettingException();
         }

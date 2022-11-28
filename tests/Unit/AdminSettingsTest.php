@@ -3,7 +3,6 @@
 use PHPUnit\Framework\TestCase;
 use Am\APIPlugin\Models\AdminSettings;
 use Am\APIPlugin\Exceptions\InvalidSettingNameException;
-use Am\APIPlugin\Exceptions\InvalidSettingValueTypeException;
 use Am\APIPlugin\Exceptions\InvalidSettingValueException;
 
 final class AdminSettingsTest extends TestCase
@@ -89,36 +88,6 @@ final class AdminSettingsTest extends TestCase
     {
         $settings = AdminSettings::getInstance();
         
-        /** Validate Types  */
-
-        try {
-            $settings->set('numrows', [ 'wrong-type' ]);
-            throw new Exception();
-
-        } catch ( InvalidSettingValueTypeException $e ) {
-            $this->assertInstanceOf( InvalidSettingValueTypeException::class, $e );
-        }
-
-        try {
-            $settings->set('emails', true);
-            throw new Exception();
-
-        } catch ( InvalidSettingValueTypeException $e ) {
-            $this->assertInstanceOf( InvalidSettingValueTypeException::class, $e );
-        }
-
-
-        try {
-            $settings->set('humandate', 1);
-            throw new Exception();
-
-        } catch ( InvalidSettingValueTypeException $e ) {
-            $this->assertInstanceOf( InvalidSettingValueTypeException::class, $e );
-        }
-
-
-        /** Validate values */
-
         try {
             $settings->set('numrows', 10 );
             throw new Exception();
@@ -142,7 +111,6 @@ final class AdminSettingsTest extends TestCase
         } catch ( InvalidSettingValueException $e ) {
             $this->assertInstanceOf( InvalidSettingValueException::class, $e );
         }
-
 
         try {
             $settings->set('emails', [
