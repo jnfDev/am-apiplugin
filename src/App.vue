@@ -15,11 +15,12 @@
   watchEffect(async () => {
     try {
       await settingStore.init()
-      loading.value = false
-      
+       
     } catch (e) {
-      loading.value = false
       error.value = e.message
+
+    } finally {
+      loading.value = false
     }
   })
 
