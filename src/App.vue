@@ -1,5 +1,28 @@
 <script setup>
-  import { RouterView } from 'vue-router';
+  import { ref, watchEffect } from 'vue'
+  import { RouterView } from 'vue-router'
+  
+  import { useSettingStore } from './stores/settings'
+
+  import Loading from './components/Loading.vue'
+  import Error from './components/Error.vue'
+
+  const settingStore = useSettingStore()
+
+  const error   = ref(false)
+  const loading = ref(true)
+
+  watchEffect(async () => {
+    try {
+      await settingStore.init()
+      loading.value = false
+      
+    } catch (e) {
+      loading.value = false
+      error.value = e.message
+    }
+  })
+
 </script>
 <template>
   <header>
@@ -10,9 +33,10 @@
     </nav>
   </header>
 
-  <main>
-    <RouterView />
-  </main>
+  
+  <Loading v-if="loading" />
+  <Error v-else-if="error" error="error" />
+  <RouterView v-else />
 
 </template>
 
