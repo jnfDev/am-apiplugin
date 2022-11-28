@@ -53,12 +53,12 @@ final class AdminPage
 
         wp_set_script_translations( $this->scriptHandle,  'am-apiplugin' );        
         wp_localize_script( $this->scriptHandle, 'AmAdminVars', [
-            'url'                   => admin_url( 'admin-ajax.php' ),
-            'nonce'                 => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
-            'actions'               => [
-                'get_api_data'   => AdminAJAXEndpoints::AJAX_GET_API_DATA_ACTION,
-                'update_setting' => AdminAJAXEndpoints::AJAX_UPDATE_SETTING_ACTION,
-                'get_settings'   => AdminAJAXEndpoints::AJAX_GET_SETTINGS_ACTION,
+            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+            'nonce'   => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
+            'actions' => [
+                'getAPIData'   => AdminAJAXEndpoints::AJAX_GET_API_DATA_ACTION,
+                'updateSetting' => AdminAJAXEndpoints::AJAX_UPDATE_SETTING_ACTION,
+                'getSettings'   => AdminAJAXEndpoints::AJAX_GET_SETTINGS_ACTION,
             ],
         ]);
     }
