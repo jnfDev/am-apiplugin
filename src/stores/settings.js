@@ -8,7 +8,7 @@ export const useSettingStore = defineStore('settings', () => {
     
     const numrows = computed(() => settings.value?.numrows)
     const emails = computed(()=> settings.value?.emails)
-    const humandate = computed(() => { settings.value?.humandate })
+    const humandate = computed(() =>  settings.value?.humandate)
 
     /** Actions */
 
@@ -23,15 +23,14 @@ export const useSettingStore = defineStore('settings', () => {
         body.append('action', action)
         body.append('wpnonce', nonce)
 
+        const response = await ( await fetch( ajaxUrl, { body, method: 'POST' } )).json()
     
-        const response = await fetch( ajaxUrl, { body, method: 'POST' } )
-        const rawData = await response.json();
-    
-        if (true !== rawData?.success) {
-            throw new Error('AJAX Request Failed')
+        if (true !== response?.success) {
+            const { error_message } = response.data
+            throw new Error(error_message)
         }
     
-        settings.value = rawData.data
+        settings.value = response.data
     }
 
     /**
@@ -39,7 +38,22 @@ export const useSettingStore = defineStore('settings', () => {
      * @return {void|Promise} 
      */
     const update = async (name, value) => {
-        // Work in progress..
+        const { ajaxUrl, nonce, actions: { updateSetting: action } } = AmAdminVars
+        const body = new FormData();
+    
+        body.append('action', action)
+        body.append('wpnonce', nonce)
+        body.append('name', name)
+        body.append('value', value);
+
+        const response = await ( await fetch( ajaxUrl, { body, method: 'POST' } )).json()
+
+        if (true !== response?.success) {
+            const { error_message } = response.data
+            throw new Error(error_message)
+        }
+        
+        settings.value[name] = value
     }
 
     return { numrows, emails, humandate, init, update }
