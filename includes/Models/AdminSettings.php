@@ -32,7 +32,7 @@ class AdminSettings
             ],
             'humandate' => [ 
                 'sanitize'   => function( $value ) {
-                    return (bool) $value;
+                    return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
                 },
                 'default' => true
             ],
@@ -64,7 +64,7 @@ class AdminSettings
         $settings = get_option( self::OPTION_KEY, [] );
 
         foreach ( $this->settingsBlueprint as $key => $blueprint ) {
-            $this->settings[ $key ] = ! empty( $settings[ $key ] ) ? $settings[ $key ] : $blueprint['default'] ;
+            $this->settings[ $key ] = isset( $settings[ $key ] ) ? $settings[ $key ] : $blueprint['default'];
         }
     }
 
