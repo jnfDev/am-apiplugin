@@ -53,7 +53,7 @@ class AdminSettings
 
                     return true;
                 },
-                'error_message' => __( 'Emails must be a list of valid emails', 'am-apiplugin' ),
+                'error_message' => __( 'Emails must be a valid list of emails, and can contain between 0 to 5 emails', 'am-apiplugin' ),
                 'default' => [
                     get_option('admin_email')
                 ]
