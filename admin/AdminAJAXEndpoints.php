@@ -120,6 +120,10 @@ final class AdminAJAXEndpoints
             $settingName  = $_POST['name'];
             $settingValue = $_POST['value'];
 
+            if ( 'emails' === $settingName ) {
+                $settingValue = ! empty( $settingValue ) ? explode( ',', $settingValue ) : [];
+            }
+
             AdminSettings::getInstance()->set( $settingName, $settingValue );
             wp_send_json_success();
 
