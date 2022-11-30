@@ -5,6 +5,7 @@
   import { useSettingStore } from './stores/settings'
   import { useDataStore } from './stores/data'
 
+  import Header from './components/Header.vue'
   import Loading from './components/Loading.vue'
   import Error from './components/Error.vue'
 
@@ -29,18 +30,13 @@
 
 </script>
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Table</RouterLink>
-      <RouterLink to="/graph">Graph</RouterLink>
-      <RouterLink to="/settings">Settings</RouterLink>
-    </nav>
-  </header>
-
-  
-  <Loading v-if="loading" />
-  <Error v-else-if="error" error="error" />
-  <RouterView v-else />
+  <Header />
+    
+  <div class="container">
+    <Loading v-if="loading" />
+    <Error v-else-if="error" error="error" />
+    <RouterView v-else />
+  </div>
 
 </template>
 
