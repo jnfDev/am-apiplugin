@@ -38,6 +38,10 @@ export const useSettingStore = defineStore('settings', () => {
      * @return {void|Promise} 
      */
     const update = async (name, value) => {
+        const fallbackValue = settings.value[name]
+
+        settings.value[name] = value
+
         const { ajaxUrl, nonce, actions: { updateSetting: action } } = AmAdminVars
         const body = new FormData();
     
@@ -50,10 +54,12 @@ export const useSettingStore = defineStore('settings', () => {
 
         if (true !== response?.success) {
             const { error_message } = response.data
+
+            // Set back the previos
+            // valid value and throw error.
+            settings.value[name] = fallbackValue
             throw new Error(error_message)
         }
-        
-        settings.value[name] = value
     }
 
     return { numrows, emails, humandate, init, update }

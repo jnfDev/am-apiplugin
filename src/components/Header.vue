@@ -46,9 +46,13 @@
         margin-right: 30px;
         display: inline-block;
         padding: 20px 0 18px 0;
+        border: none;
+        outline: none;
+        box-shadow: none;
         border-bottom: 2px solid #fff;
         color: rgb(102, 102, 102);
         text-decoration: none;
+
     }
 
     nav .tab-link:hover {

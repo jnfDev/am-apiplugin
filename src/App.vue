@@ -31,12 +31,12 @@
 </script>
 <template>
   <Header />
-    
-  <div class="am-container">
+  
+  <main id="am-api-based-app" class="am-container">
     <Loading v-if="loading" />
     <Error v-else-if="error" error="error" />
     <RouterView v-else />
-  </div>
+  </main>
 
 </template>
 
