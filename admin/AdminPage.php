@@ -53,8 +53,9 @@ final class AdminPage
 
         wp_set_script_translations( $this->scriptHandle,  'am-apiplugin' );        
         wp_localize_script( $this->scriptHandle, 'AmAdminVars', [
-            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
+            'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
+            'nonce'     => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
+            'assetsUrl' => $this->plugin->rootURL . 'admin/assets',
             'actions' => [
                 'getAPIData'   => AdminAJAXEndpoints::AJAX_GET_API_DATA_ACTION,
                 'updateSetting' => AdminAJAXEndpoints::AJAX_UPDATE_SETTING_ACTION,
