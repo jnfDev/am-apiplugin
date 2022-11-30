@@ -32,7 +32,7 @@
 <template>
   <Header />
     
-  <div class="container">
+  <div class="am-container">
     <Loading v-if="loading" />
     <Error v-else-if="error" error="error" />
     <RouterView v-else />

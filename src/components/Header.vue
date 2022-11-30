@@ -1,22 +1,15 @@
 <script setup>
-    import { computed } from 'vue'
     import { RouterLink } from 'vue-router';
-
-    const logoUrl = computed(() => {        
-        const { assetsUrl } = AmAdminVars;
-        return `${assetsUrl}/images/logo.svg` 
-    })
+    import Logo from './Logo.vue'
 </script>
 
 <template>
   <header>
-    <div class="container logo">
-        <span class="logo-cover">
-            <img :src="logoUrl" alt="Plugin Logo">
-        </span>
+    <div class="am-container logo">
+        <Logo />
         <h1>Am Test Plugin</h1>
     </div>
-    <nav class="container">
+    <nav class="am-container">
       <RouterLink class="tab-link" to="/">Table</RouterLink>
       <RouterLink class="tab-link" to="/graph">Graph</RouterLink>
       <RouterLink class="tab-link" to="/settings">Settings</RouterLink>
