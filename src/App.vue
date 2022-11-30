@@ -3,11 +3,13 @@
   import { RouterView } from 'vue-router'
   
   import { useSettingStore } from './stores/settings'
+  import { useDataStore } from './stores/data'
 
   import Loading from './components/Loading.vue'
   import Error from './components/Error.vue'
 
   const settingStore = useSettingStore()
+  const dataStore = useDataStore()
 
   const error   = ref(false)
   const loading = ref(true)
@@ -15,6 +17,7 @@
   watchEffect(async () => {
     try {
       await settingStore.init()
+      await dataStore.loadData()
        
     } catch (e) {
       error.value = e.message
