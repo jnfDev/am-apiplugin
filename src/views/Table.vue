@@ -1,5 +1,5 @@
 <script setup>
-    
+    import { computed } from 'vue'
     import { storeToRefs } from 'pinia'
     import { useDataStore } from '../stores/data'
     import { useSettingStore } from '../stores/settings'
@@ -11,6 +11,8 @@
 
     const { numrows, humandate, emails } = storeToRefs(settingStore)
     const { table } = storeToRefs(dataStore)
+
+    const rows = computed(() => table.value.rows.filter((row, i) => numrows.value > i)) 
 </script>
 
 <template>
@@ -24,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="row in table.rows" :key="row.id">
+            <tr v-for="row in rows" :key="row.id">
                 <td>
                     {{row.id}}
                 </td>
