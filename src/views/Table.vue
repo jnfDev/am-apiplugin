@@ -31,7 +31,7 @@
                     {{row.id}}
                 </td>
                 <td>
-                    {{ row.url }}
+                    <a target="_blank" :href="row.url">{{ row.url }}</a>
                 </td>
                 <td>
                     {{ row.title }}
@@ -46,9 +46,61 @@
         </tbody>
     </table>
 
-    <ul>
-        <li v-for="email in emails" :key="email">
-            {{ email }}
-        </li>
-    </ul>
+    <!-- TODO: Make translatable -->
+    <div class="emails-list">
+        <h1>Emails</h1>
+        <ul>
+            <li v-for="email in emails" :key="email">
+                {{ email }}
+            </li>
+        </ul>
+    </div>
 </template>
+
+<style scoped>
+
+    .emails-list {
+        padding-top: 30px;
+    }
+    .emails-list ul {
+        padding-left: 15px;
+        list-style: disc;
+        font-size: 15px;
+    }
+
+    .emails-list ul > li {
+    
+    
+    }
+
+
+    table {
+        width: 100%;
+    }
+
+    table thead {
+        background-color: #fff;
+    }
+
+    table th {
+        font-size: 15px;
+    }
+
+    table td {
+        font-size: 14px;
+    }
+
+    table tbody tr:nth-child(odd) {
+        background-color: #f6f7f7;
+    }
+    table tbody tr:nth-child(even) {
+        background-color: #fff;        
+    }
+
+    table td,
+    table th {
+        color: rgb(60, 67, 74);
+        text-align: left;
+        padding: 10px 15px;
+    }
+</style>
