@@ -8,8 +8,22 @@
 }
 
 #am-api-based-app {
-    padding-top: 30px;
+    padding-top: 25px;
     position: relative;
+}
+
+#am-api-based-app .loading {
+    cursor: progress;
+    animation-name: loading;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes loading {
+    from { opacity: 0.6; }
+    to { opacity: 0.3; }
 }
 
 #am-api-based-app h1 {

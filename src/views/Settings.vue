@@ -3,6 +3,7 @@
     import { storeToRefs } from 'pinia'
     import { useSettingStore } from '../stores/settings'
 
+    import Error from '../components/Error.vue'
     import TextRepeater from '../components/TextRepeater.vue'
 
     const settingStore = useSettingStore()
@@ -30,15 +31,10 @@
             loading.value[settingName] = false
         }
     }
-
 </script>
 
-
 <template>
-
-    <div class="error" v-if="error">
-        {{ error }}
-    </div>
+    <Error v-if="error" :error="error" /> 
 
     <h1>Table Settings</h1>
 
@@ -57,30 +53,6 @@
 </template>
 
 <style scoped>
-
-    .loading {
-        animation-name: loading;
-        animation-duration: 1s;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-    }
-
-    @keyframes loading {
-        from { opacity: 0.6; }
-        to { opacity: 0.4; }
-    }
-
-    .error {
-        background: #fff;
-        border: 1px solid #c3c4c7;
-        border-left-width: 4px;
-        margin: 0;
-        box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
-        padding: 10px 12px;
-        border-left-color: #dba617;
-        margin-bottom: 20px;
-    }
 
     label {
         display: inline-block;

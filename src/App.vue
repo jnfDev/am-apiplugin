@@ -34,7 +34,7 @@
   
   <main id="am-api-based-app" class="am-container">
     <Loading v-if="loading" />
-    <Error v-else-if="error" error="error" />
+    <Error v-else-if="error" :error="error" />
     <RouterView v-else />
   </main>
 
