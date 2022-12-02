@@ -10,9 +10,11 @@
   "author": "jnfdev",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^3.9.1",
     "dotenv": "^16.0.3",
     "pinia": "^2.0.26",
     "vue": "^3.2.41",
+    "vue-chartjs": "^4.1.2",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
