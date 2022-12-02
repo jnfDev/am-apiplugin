@@ -31,7 +31,7 @@ export const useDataStore = defineStore('data',() => {
         const { title, data: { headers, rows } } = table
         
         _table.value = { title, headers, rows }
-        _graph.value = graph
+        _graph.value = Object.values(graph)
     }
 
     return { table, graph, loadData }
