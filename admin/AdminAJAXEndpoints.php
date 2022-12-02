@@ -70,6 +70,11 @@ final class AdminAJAXEndpoints
             $baseUrl     = 'https://miusage.com';
             $pathURL     = 'v1/challenge/2/static/';
             $apiEndpoint = "{$baseUrl}/{$pathURL}";
+            $refresh     = filter_var( $_POST['refresh'], FILTER_VALIDATE_BOOLEAN );
+
+            if ( true === $refresh ) {
+                RequestThrottle::reset();
+            }
 
             $apiData = ( new RequestThrottle() )->__invoke( 
                 $baseUrl, 
