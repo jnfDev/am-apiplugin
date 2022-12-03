@@ -14,7 +14,7 @@ final class AdminPage
 
     protected APIPlugin $plugin;
 
-    protected string $scriptHandle = 'am-admin-page-scr';
+    protected string $scriptHandle = 'am-admin-page-script';
     
     protected function init()
     {
@@ -45,13 +45,12 @@ final class AdminPage
         $dotenv->load();
 
         if ( isset( $_ENV['AM_MODE'] ) && 'DEV' === strtoupper( $_ENV['AM_MODE'] ) ) {  
-            wp_enqueue_script( $this->scriptHandle, esc_url( $_ENV['AM_DEV_SERVER'] ) . 'src/main.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion, false );
+            wp_register_script( $this->scriptHandle, esc_url( $_ENV['AM_DEV_SERVER'] ) . 'src/main.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion, false );
         } else {
-            wp_enqueue_script( $this->scriptHandle, $this->plugin->rootURL . 'dist/main.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion, false );
+            wp_register_script( $this->scriptHandle, $this->plugin->rootURL . 'dist/main.js', [ 'jquery', 'wp-i18n' ], $this->plugin->pluginVersion, false );
             wp_enqueue_style( 'am-admin-page-css', $this->plugin->rootURL . 'dist/main.css' , [], $this->plugin->pluginVersion );
         } 
 
-        wp_set_script_translations( $this->scriptHandle,  'am-apiplugin' );        
         wp_localize_script( $this->scriptHandle, 'AmAdminVars', [
             'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
             'nonce'     => wp_create_nonce( AdminAJAXEndpoints::NONCE_ACTION ),
@@ -61,6 +60,19 @@ final class AdminPage
                 'updateSetting' => AdminAJAXEndpoints::AJAX_UPDATE_SETTING_ACTION,
                 'getSettings'   => AdminAJAXEndpoints::AJAX_GET_SETTINGS_ACTION,
             ],
+            'i18n' => [
+                'Am Test Plugin' => esc_html__( 'Am Test Plugin', 'am-apiplugin' ),
+                'Table'  => esc_html__( 'Table', 'am-apiplugin' ),
+                'Graph'  => esc_html__( 'Graph', 'am-apiplugin' ),
+                'Settings'  => esc_html__( 'Settings', 'am-apiplugin' ),
+                'Am Graph'  => esc_html__( 'Am Graph', 'am-apiplugin' ),
+                'Loading...'  => esc_html__( 'Loading...', 'am-apiplugin' ),
+                'Refresh'  => esc_html__( 'Refresh', 'am-apiplugin' ),
+                'Table Settings'  => esc_html__( 'Table Settings', 'am-apiplugin' ),
+                'Rows Number'  => esc_html__( 'Rows Number', 'am-apiplugin' ),
+                'Humandate'  => esc_html__( 'Humandate', 'am-apiplugin' ),
+                'Emails'  => esc_html__( 'Emails', 'am-apiplugin' ),
+            ]
         ]);
     }
     
@@ -83,6 +95,8 @@ final class AdminPage
          */
         $challengeIds = [1];
         $assetUrl     = $this->plugin->rootURL . '/admin/assets';
+
+        wp_enqueue_script( $this->scriptHandle );
 
         require_once __DIR__ . '/views/admin-page.php';
     }

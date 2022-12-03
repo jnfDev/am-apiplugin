@@ -3,6 +3,7 @@
     import { storeToRefs } from 'pinia'
     import { useDataStore } from '../stores/data'
     import { useSettingStore } from '../stores/settings'
+    import { __ } from '../i18n'
 
     import Date from '../components/Date.vue'
 
@@ -11,7 +12,7 @@
 
     const { numrows, humandate, emails } = storeToRefs(settingStore)
     const { table } = storeToRefs(dataStore)
-
+    
     const rows = computed(() => table.value.rows.filter((row, i) => numrows.value > i)) 
 </script>
 
@@ -48,7 +49,8 @@
 
     <!-- TODO: Make translatable -->
     <div class="emails-list">
-        <h1>Emails</h1>
+        <h1>{{ __('Emails') }}</h1>
+
         <ul>
             <li v-for="email in emails" :key="email">
                 {{ email }}
@@ -67,12 +69,6 @@
         list-style: disc;
         font-size: 15px;
     }
-
-    .emails-list ul > li {
-    
-    
-    }
-
 
     table {
         width: 100%;

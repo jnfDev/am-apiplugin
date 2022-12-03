@@ -20,7 +20,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid "This plugin is an application test (code challenge) for Awesome Motive."
-msgstr ""
+msgstr "Este plugin es una prueba de ingreso para Awesome Motive."
 
 #. Author of the plugin
 msgid "jnfdev"
@@ -32,39 +32,39 @@ msgstr ""
 
 #: admin/AdminPage.php:65
 msgid "Table"
-msgstr ""
+msgstr "Tabla"
 
 #: admin/AdminPage.php:66
 msgid "Graph"
-msgstr ""
+msgstr "Grafico"
 
 #: admin/AdminPage.php:67
 msgid "Settings"
-msgstr ""
+msgstr "Opciones"
 
 #: admin/AdminPage.php:68
 msgid "Am Graph"
-msgstr ""
+msgstr "Am Grafica"
 
 #: admin/AdminPage.php:69
 msgid "Loading..."
-msgstr ""
+msgstr "Cargando..."
 
 #: admin/AdminPage.php:70
 msgid "Refresh"
-msgstr ""
+msgstr "Recargar"
 
 #: admin/AdminPage.php:71
 msgid "Table Settings"
-msgstr ""
+msgstr "Opciones de Tabla"
 
 #: admin/AdminPage.php:72
 msgid "Rows Number"
-msgstr ""
+msgstr "Numero de Filas"
 
 #: admin/AdminPage.php:73
 msgid "Humandate"
-msgstr ""
+msgstr "Fecha Humana"
 
 #: admin/AdminPage.php:74
 msgid "Emails"
@@ -77,8 +77,8 @@ msgstr ""
 
 #: includes/Models/AdminSettings.php:30
 msgid "Numrows must be a valid number between 1 and 5"
-msgstr ""
+msgstr "Numero de Filas debe ser un number valido entre 1 y 5"
 
 #: includes/Models/AdminSettings.php:56
 msgid "Emails must be a valid list of emails, and can contain between 0 to 5 emails"
-msgstr ""
+msgstr "Emails debe ser una lista validad de emails de 0 a 5 emails"

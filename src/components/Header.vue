@@ -1,5 +1,6 @@
 <script setup>
-    import { RouterLink } from 'vue-router';
+    import { RouterLink } from 'vue-router'
+    import { __ } from '../i18n'
     import Logo from './Logo.vue'
 </script>
 
@@ -7,12 +8,12 @@
   <header>
     <div class="am-container logo">
         <Logo />
-        <h1>Am Test Plugin</h1>
+        <h1>{{ __('Am Test Plugin') }}</h1>
     </div>
     <nav class="am-container">
-      <RouterLink class="tab-link" to="/">Table</RouterLink>
-      <RouterLink class="tab-link" to="/graph">Graph</RouterLink>
-      <RouterLink class="tab-link" to="/settings">Settings</RouterLink>
+      <RouterLink class="tab-link" to="/">{{ __('Table') }}</RouterLink>
+      <RouterLink class="tab-link" to="/graph">{{ __('Graph') }}</RouterLink>
+      <RouterLink class="tab-link" to="/settings">{{ __('Settings') }}</RouterLink>
     </nav>
   </header>
 </template>

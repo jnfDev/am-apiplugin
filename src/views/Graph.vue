@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDataStore } from '../stores/data'
+import { __ } from '../i18n'
 
 import Error from '../components/Error.vue'
 import LineGraph from '../components/LineGraph.vue';
@@ -32,7 +33,7 @@ const refreshData = async () => {
 
 <template>
     <Error v-if="error" :error="error" /> 
-    <h1>Graph <button :class="{loading: loading}" @click="refreshData">Refresh</button></h1>
+    <h1>{{ __('Graph') }} <button :class="{loading: loading}" @click="refreshData">{{ __('Refresh') }}</button></h1>
     <div :class="{ loading: loading }">
         <LineGraph :data="graph" />
     </div>

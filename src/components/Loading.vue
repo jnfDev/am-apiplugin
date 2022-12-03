@@ -1,10 +1,11 @@
 <script setup>
 import Logo from './Logo.vue'
+import { __ } from '../i18n'
 </script>
 
 <template>
     <div class="loading">
-        <Logo /> <span>Loading...</span>
+        <Logo /> <span>{{ __('Loading...') }}</span>
     </div>
 </template>
 

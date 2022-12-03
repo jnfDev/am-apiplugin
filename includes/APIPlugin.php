@@ -42,7 +42,7 @@ final class APIPlugin
         $this->rootPath      = dirname( __DIR__ );
         $this->rootURL       = plugin_dir_url( $this->rootPath . "/{$this->pluginSlug}.php" );
 
-        $pluginLangPath = $this->rootPath . '/languages/';
+        $pluginLangPath = "{$this->pluginSlug}/languages/";
         load_plugin_textdomain( $this->pluginSlug, false, $pluginLangPath );
     }
 

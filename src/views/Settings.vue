@@ -2,6 +2,7 @@
     import { ref } from 'vue'
     import { storeToRefs } from 'pinia'
     import { useSettingStore } from '../stores/settings'
+    import { __ } from '../i18n'
 
     import Error from '../components/Error.vue'
     import TextRepeater from '../components/TextRepeater.vue'
@@ -36,18 +37,18 @@
 <template>
     <Error v-if="error" :error="error" /> 
 
-    <h1>Table Settings</h1>
+    <h1>{{ __('Table Settings') }}</h1>
 
     <div class="setting-wrapper" :class="{ loading: loading['numrows'] }">
-        <label for="numrows">Rows Number</label>
+        <label for="numrows">{{ __('Rows Number') }}</label>
         <input type="number" min="1" max="5" :disabled="loading['numrows']" id="numrows" :value="numrows" @change="(e) => onChange('numrows', e.target.value)">
     </div>
     <div class="setting-wrapper" :class="{ loading: loading['humandate'] }">
-        <label for="humandate">Humandate</label>
+        <label for="humandate">{{ __('Humandate') }}</label>
         <input type="checkbox" id="humandate" :disabled="loading['humandate']" :checked="humandate" @change="(e) => onChange('humandate', e.target.checked)" >
     </div>
     <div class="setting-wrapper" :class="{ loading: loading['emails'] }">
-        <label for="emails">Emails</label>
+        <label for="emails">{{ __('Emails') }}</label>
         <TextRepeater :emails="emails" @change="(emails) => onChange('emails', emails)" :isloading="loading['emails']" />
     </div>
 </template>

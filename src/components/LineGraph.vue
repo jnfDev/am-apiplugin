@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { Line } from 'vue-chartjs'
+import { __ } from '../i18n'
 import {
     Chart as ChartJS,
     Title,
@@ -41,7 +42,7 @@ const chartData = computed(() => ({
     labels: props.data.map((d) => (new Date(d.date * 1000)).toLocaleDateString()),
     datasets: [
         {
-            label: "Am Graph",
+            label: __('Am Graph'),
             backgroundColor: "#1b336f",
             data: props.data.map((d) => d.value )
         }
