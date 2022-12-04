@@ -61,17 +61,57 @@ final class AdminPage
                 'getSettings'   => AdminAJAXEndpoints::AJAX_GET_SETTINGS_ACTION,
             ],
             'i18n' => [
-                'Am Test Plugin' => esc_html__( 'Am Test Plugin', 'am-apiplugin' ),
-                'Table'  => esc_html__( 'Table', 'am-apiplugin' ),
-                'Graph'  => esc_html__( 'Graph', 'am-apiplugin' ),
-                'Settings'  => esc_html__( 'Settings', 'am-apiplugin' ),
-                'Am Graph'  => esc_html__( 'Am Graph', 'am-apiplugin' ),
-                'Loading...'  => esc_html__( 'Loading...', 'am-apiplugin' ),
-                'Refresh'  => esc_html__( 'Refresh', 'am-apiplugin' ),
-                'Table Settings'  => esc_html__( 'Table Settings', 'am-apiplugin' ),
-                'Rows Number'  => esc_html__( 'Rows Number', 'am-apiplugin' ),
-                'Humandate'  => esc_html__( 'Humandate', 'am-apiplugin' ),
-                'Emails'  => esc_html__( 'Emails', 'am-apiplugin' ),
+                [
+                    'msgid' => 'Am Test Plugin',
+                    'msgstr' => esc_html__( 'Am Test Plugin', 'am-apiplugin' ),
+                ],
+                [
+                    'msgid' => 'Table',
+                    'msgstr' => esc_html__( 'Table', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Settings',
+                    'msgstr' => esc_html__( 'Settings', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Am Graph',
+                    'msgstr' => esc_html__( 'Am Graph', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Loading...',
+                    'msgstr' => esc_html__( 'Loading...', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Refresh',
+                    'msgstr' => esc_html__( 'Refresh', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Table Settings',
+                    'msgstr' => esc_html__( 'Table Settings', 'am-apiplugin'),
+                ],                [
+                    'msgid' => 'Rows Number',
+                    'msgstr' => esc_html__( 'Rows Number', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Humandate',
+                    'msgstr' => esc_html__( 'Humandate', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Emails',
+                    'msgstr' => esc_html__( 'Emails', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Set the number of rows shown on the table (Table tab). The value must be a valid number between 1 and 5',
+                    'msgstr' => esc_html__( 'Set the number of rows shown on the table (Table tab). The value must be a valid number between 1 and 5', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Set the type of date shown on the table (Table tab)',
+                    'msgstr' => esc_html__( 'Set the type of date shown on the table (Table tab)', 'am-apiplugin'),
+                ],
+                [
+                    'msgid' => 'Set emails listed on the Table tab. The list must be a valid list of emails, containing between 0 to 5 emails',
+                    'msgstr' => esc_html__( 'Set emails listed on the Table tab. The list must be a valid list of emails, containing between 0 to 5 emails', 'am-apiplugin'),
+                ],
             ]
         ]);
     }

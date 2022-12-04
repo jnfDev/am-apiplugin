@@ -24,20 +24,22 @@ const removeEmail = (email) => {
     const { emails } = props
     emit('change', emails.filter(e => e !== email))
 }
+
 </script>
 
 <template>
     <div class="text-repeater" :class="{ loading: isloading }">
         <form @submit.prevent="addEmail">
-            <input :disabled="isloading" v-model="newEmail">
-            <button>
+            <input :disabled="(isloading || emails.length >= 5)" v-model="newEmail">
+            <button :disabled="(isloading || emails.length >= 5)" >
                 <span class="dashicons dashicons-insert"></span>
             </button>
         </form>
         <ul>
             <li v-for="email in emails" :key="email">
-                {{ email }} <button @click="removeEmail(email)">
-                <span class="dashicons dashicons-remove"></span>
+                {{ email }} 
+                <button :disabled="isloading" @click="removeEmail(email)">
+                    <span class="dashicons dashicons-remove"></span>
                 </button>
             </li>
         </ul>
@@ -45,6 +47,14 @@ const removeEmail = (email) => {
 </template>
 
 <style scoped>
+
+    button:disabled,
+    button[disabled],
+    input:disabled,
+    input[disabled] {
+        cursor: auto !important;
+        opacity: 0.5;
+    }
 
     li {
         display: flex;

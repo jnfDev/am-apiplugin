@@ -5,13 +5,15 @@
  */
 export const __ = (text) => {
     const { i18n } = AmAdminVars;
-    const translation = i18n[text]
+    const translation = i18n.filter((t) => t.msgid === text )
 
-    if (! translation) {
+    if (! translation.length) {
         return text;
     }
 
-    return translation;
+    const translatedText = translation[0]?.msgstr || text; 
+
+    return translatedText;
 }
 
 /**

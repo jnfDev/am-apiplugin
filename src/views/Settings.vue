@@ -41,30 +41,51 @@
     <h1>{{ __('Table Settings') }}</h1>
 
     <div class="setting-wrapper" :class="{ loading: loading['numrows'] }">
-        <label for="numrows">{{ __('Rows Number') }}</label>
+        <div class="label">
+            <label for="numrows">{{ __('Rows Number') }}</label>
+            <small>{{ __('Set the number of rows shown on the table (Table tab). The value must be a valid number between 1 and 5') }}</small>
+        </div>
         <input type="number" min="1" max="5" :disabled="loading['numrows']" id="numrows" :value="numrows" @change="(e) => onChange('numrows', e.target.value)">
     </div>
     <div class="setting-wrapper" :class="{ loading: loading['humandate'] }">
-        <label for="humandate">{{ __('Humandate') }}</label>
+        <div class="label">
+            <label for="humandate">{{ __('Humandate') }}</label>
+            <small>{{ __('Set the type of date shown on the table (Table tab)') }}</small>
+        </div>
         
         <Switch :disabled="loading['humandate']" :value="humandate" @onChange="(value) => onChange('humandate', value)" />
-
-        <!-- <input type="checkbox" id="humandate" :disabled="loading['humandate']" :checked="humandate" @change="(e) => onChange('humandate', e.target.checked)" > -->
     </div>
     <div class="setting-wrapper" :class="{ loading: loading['emails'] }">
-        <label for="emails">{{ __('Emails') }}</label>
+        <div class="label">
+            <label for="emails">{{ __('Emails') }}</label>
+            <small>{{ __('Set emails listed on the Table tab. The list must be a valid list of emails, containing between 0 to 5 emails') }}</small>
+        </div>
         <TextRepeater :emails="emails" @change="(emails) => onChange('emails', emails)" :isloading="loading['emails']" />
     </div>
 </template>
 
 <style scoped>
 
-    label {
+    .label {
         display: inline-block;
         font-size: 16px;
         font-weight: 600;
         color: rgb(60, 67, 74);
-        width: 200px;
+        width: 400px;
+        margin-right: 30px;
+    }
+
+    .label label {
+        display: block;
+        color: rgb(60, 67, 74);
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .label small {
+        display: inline-block;
+        color: rgb(160, 160, 160);
+        margin-bottom: 30px;
     }
 
     .setting-wrapper {

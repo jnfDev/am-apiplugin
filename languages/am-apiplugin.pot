@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-04T16:34:17+00:00\n"
+"POT-Creation-Date: 2022-12-04T20:35:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: am-apiplugin\n"
@@ -26,52 +26,60 @@ msgstr ""
 msgid "jnfdev"
 msgstr ""
 
-#: admin/AdminPage.php:64
+#: admin/AdminPage.php:66
 msgid "Am Test Plugin"
 msgstr ""
 
-#: admin/AdminPage.php:65
+#: admin/AdminPage.php:70
 msgid "Table"
 msgstr ""
 
-#: admin/AdminPage.php:66
-msgid "Graph"
-msgstr ""
-
-#: admin/AdminPage.php:67
+#: admin/AdminPage.php:74
 msgid "Settings"
 msgstr ""
 
-#: admin/AdminPage.php:68
+#: admin/AdminPage.php:78
 msgid "Am Graph"
 msgstr ""
 
-#: admin/AdminPage.php:69
+#: admin/AdminPage.php:82
 msgid "Loading..."
 msgstr ""
 
-#: admin/AdminPage.php:70
+#: admin/AdminPage.php:86
 msgid "Refresh"
 msgstr ""
 
-#: admin/AdminPage.php:71
+#: admin/AdminPage.php:90
 msgid "Table Settings"
 msgstr ""
 
-#: admin/AdminPage.php:72
+#: admin/AdminPage.php:93
 msgid "Rows Number"
 msgstr ""
 
-#: admin/AdminPage.php:73
+#: admin/AdminPage.php:97
 msgid "Humandate"
 msgstr ""
 
-#: admin/AdminPage.php:74
+#: admin/AdminPage.php:101
 msgid "Emails"
 msgstr ""
 
-#: admin/AdminPage.php:82
-#: admin/AdminPage.php:83
+#: admin/AdminPage.php:105
+msgid "Set the number of rows shown on the table (Table tab). The value must be a valid number between 1 and 5"
+msgstr ""
+
+#: admin/AdminPage.php:109
+msgid "Set the type of date shown on the table (Table tab)"
+msgstr ""
+
+#: admin/AdminPage.php:113
+msgid "Set emails listed on the Table tab. The list must be a valid list of emails, containing between 0 to 5 emails"
+msgstr ""
+
+#: admin/AdminPage.php:122
+#: admin/AdminPage.php:123
 msgid "Am API-Based Plugin"
 msgstr ""
 
@@ -104,21 +112,21 @@ msgid "Wpdb is not defined"
 msgstr ""
 
 #. translators: 1: <b> 2: </b> 3: invalid numrows given
-#: includes/Models/AdminSettings.php:33
+#: includes/Models/AdminSettings.php:34
 msgid "%1$sRows Number%2$s must be a valid number between 1 and 5, %3$s given"
 msgstr ""
 
 #. translators: 1: <b> 2: </b> 3: how many emails were given
-#: includes/Models/AdminSettings.php:55
+#: includes/Models/AdminSettings.php:56
 msgid "%1$sEmails%2$s can contain between 0 and 5 email addresses (inclusive), %3$s given"
 msgstr ""
 
 #. translators: 1: <b> 2: </b>
-#: includes/Models/AdminSettings.php:65
+#: includes/Models/AdminSettings.php:66
 msgid "%1$sEmails%2$s can't contain duplicate values"
 msgstr ""
 
 #. translators: 1: <b> 2: </b> 3: invalid email given
-#: includes/Models/AdminSettings.php:76
+#: includes/Models/AdminSettings.php:77
 msgid "%1$sEmails%2$s must contain valid emails, %3$s given"
 msgstr ""
