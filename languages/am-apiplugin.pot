@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-03T23:13:53+00:00\n"
+"POT-Creation-Date: 2022-12-04T16:34:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: am-apiplugin\n"
@@ -75,10 +75,50 @@ msgstr ""
 msgid "Am API-Based Plugin"
 msgstr ""
 
-#: includes/Models/AdminSettings.php:30
-msgid "Numrows must be a valid number between 1 and 5"
+#: includes/Exceptions/EmptyFallbackResponseException.php:17
+msgid "Empty Fallback Response"
 msgstr ""
 
-#: includes/Models/AdminSettings.php:56
-msgid "Emails must be a valid list of emails, and can contain between 0 to 5 emails"
+#: includes/Exceptions/InvalidSettingNameException.php:17
+msgid "Invalid Setting Name"
+msgstr ""
+
+#: includes/Exceptions/InvalidSettingValueException.php:17
+msgid "Invalid Setting Value"
+msgstr ""
+
+#: includes/Exceptions/InvalidURLException.php:17
+msgid "Invalid URL"
+msgstr ""
+
+#: includes/Exceptions/RequestFailedException.php:17
+msgid "Request Failed"
+msgstr ""
+
+#: includes/Exceptions/UpdateSettingException.php:17
+msgid "Setting Update Failed"
+msgstr ""
+
+#: includes/Exceptions/WpdbNotDefinedException.php:17
+msgid "Wpdb is not defined"
+msgstr ""
+
+#. translators: 1: <b> 2: </b> 3: invalid numrows given
+#: includes/Models/AdminSettings.php:33
+msgid "%1$sRows Number%2$s must be a valid number between 1 and 5, %3$s given"
+msgstr ""
+
+#. translators: 1: <b> 2: </b> 3: how many emails were given
+#: includes/Models/AdminSettings.php:55
+msgid "%1$sEmails%2$s can contain between 0 and 5 email addresses (inclusive), %3$s given"
+msgstr ""
+
+#. translators: 1: <b> 2: </b>
+#: includes/Models/AdminSettings.php:65
+msgid "%1$sEmails%2$s can't contain duplicate values"
+msgstr ""
+
+#. translators: 1: <b> 2: </b> 3: invalid email given
+#: includes/Models/AdminSettings.php:76
+msgid "%1$sEmails%2$s must contain valid emails, %3$s given"
 msgstr ""

@@ -24,10 +24,18 @@ class AdminSettings
                 'sanitize'   => function( $value ) {
                     return (int) $value;
                 },
-                'validate'   => function( $value ) {
-                    return $value > 0 && $value <= 5;
+                'validation'   => function( $value ) {
+                    if ( $value > 0 && $value <= 5 ) {
+                        return false;
+                    }
+                    return sprintf(
+                        /* translators: 1: <b> 2: </b> 3: invalid numrows given */
+                        esc_html__('%1$sRows Number%2$s must be a valid number between 1 and 5, %3$s given', 'am-apiplugin'),
+                        '<b>',
+                        '</b>',
+                        $value
+                    );
                 },
-                'error_message' => __( 'Numrows must be a valid number between 1 and 5', 'am-apiplugin' ),
                 'default'  => 5
             ],
             'humandate' => [ 
@@ -40,20 +48,41 @@ class AdminSettings
                 'sanitize'   => function( $value ) {
                     return array_map( 'sanitize_email', $value );
                 },
-                'validate' => function( $value ) {
+                'validation' => function( $value ) {
                     if ( ! ( count( $value ) <= 5 ) ) {
-                        return false;
+                        return sprintf(
+                            /* translators: 1: <b> 2: </b> 3: how many emails were given */
+                            esc_html__('%1$sEmails%2$s can contain between 0 and 5 email addresses (inclusive), %3$s given', 'am-apiplugin'),
+                            '<b>',
+                            '</b>',
+                            count( $value )
+                        );
+                    }
+
+                    if ( count( $value ) !== count( array_unique( $value ) ) ){
+                        return sprintf(
+                            /* translators: 1: <b> 2: </b> */
+                            esc_html__('%1$sEmails%2$s can\'t contain duplicate values', 'am-apiplugin'),
+                            '<b>',
+                            '</b>',
+                            $value
+                        );
                     }
 
                     foreach ( $value as $email ) {
                         if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
-                            return false;
+                            return sprintf(
+                                /* translators: 1: <b> 2: </b> 3: invalid email given */
+                                esc_html__('%1$sEmails%2$s must contain valid emails, %3$s given', 'am-apiplugin'),
+                                '<b>',
+                                '</b>',
+                                $email
+                            );
                         }
                     }
 
                     return true;
                 },
-                'error_message' => __( 'Emails must be a valid list of emails, and can contain between 0 to 5 emails', 'am-apiplugin' ),
                 'default' => [
                     get_option('admin_email')
                 ]
@@ -79,10 +108,9 @@ class AdminSettings
         $sanitize = $this->settingsBlueprint[ $name ]['sanitize'];
         $value = $sanitize($value);
 
-        if ( isset( $this->settingsBlueprint[ $name ]['validate'] ) && 
-             ! $this->settingsBlueprint[ $name ]['validate']( $value ) 
-        ) {
-            $errorMessage = $this->settingsBlueprint[ $name ]['error_message'];
+        $validation = isset( $this->settingsBlueprint[ $name ]['validation'] ) ? $this->settingsBlueprint[ $name ]['validation'] : false;
+
+        if ( $validation && $errorMessage = $validation( $value ) ) {
             throw new InvalidSettingValueException( $errorMessage );
         }
 

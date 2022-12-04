@@ -10,10 +10,11 @@ defined( 'ABSPATH' ) || exit;
 class WpdbNotDefinedException extends Exception {
 
     public function __construct(
-        string $message = "Wpdb is not defined", 
+        string $message = "", 
         int $code = 0, 
         Throwable $previous = null
     ) {
+        $message = empty( $message ) ? esc_html__( 'Wpdb is not defined', 'am-apiplugin' ) : $message;
         parent::__construct( $message, $code, $previous );
     }
 }

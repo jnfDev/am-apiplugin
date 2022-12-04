@@ -10,10 +10,11 @@ defined( 'ABSPATH' ) || exit;
 class RequestFailedException extends Exception {
 
     public function __construct(
-        $message = "Request Failed",
+        $message = "",
         int $code = 0,
         Throwable $previous = null
     ) {
+        $message = empty( $message ) ? esc_html__( 'Request Failed', 'am-apiplugin' ) : $message;
         parent::__construct( $message, $code, $previous );
     }
 

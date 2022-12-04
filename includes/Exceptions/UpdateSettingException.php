@@ -10,10 +10,11 @@ defined( 'ABSPATH' ) || exit;
 class UpdateSettingException extends Exception {
 
     public function __construct(
-        $message = "Setting Update Failed",
+        $message = "",
         int $code = 0,
         Throwable $previous = null
     ) {
+        $message = empty( $message ) ? esc_html__( 'Setting Update Failed', 'am-apiplugin' ) : $message;
         parent::__construct( $message, $code, $previous );
     }
 

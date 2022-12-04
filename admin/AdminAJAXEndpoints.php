@@ -64,7 +64,7 @@ final class AdminAJAXEndpoints
     {
         try {
             if ( ! $this->validateAJAXRequest() ) {
-                throw new RequestFailedException( "Invalid AJAX Request", 1 );
+                throw new RequestFailedException();
             }
 
             $baseUrl     = 'https://miusage.com';
@@ -117,7 +117,7 @@ final class AdminAJAXEndpoints
     {
         try {
             if ( ! $this->validateAJAXRequest() ) {
-                throw new RequestFailedException( "Invalid AJAX Request", 1 );
+                throw new RequestFailedException();
             }
 
             // We're letting the responsibility of sanitizing and validating
@@ -143,7 +143,7 @@ final class AdminAJAXEndpoints
     {
         try {
             if ( ! $this->validateAJAXRequest() ) {
-                throw new RequestFailedException( "Invalid AJAX Request", 1 );
+                throw new RequestFailedException();
             }
 
             $settings = AdminSettings::getInstance()->get();

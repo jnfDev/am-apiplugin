@@ -8,9 +8,9 @@ defineProps({
 </script>
 
 <template>
-    <div class="error">
-        {{ error }}
-    </div>
+    <!-- Due to we are scaping the error variable 
+        on the PHP side, we can make use of v-html more safety -->
+    <div class="error" v-html="error"></div>
 </template>
 
 <style scoped>
