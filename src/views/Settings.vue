@@ -74,5 +74,10 @@
         padding-top: 30px;
         padding-bottom: 30px;
         border-bottom: 1px solid #e4e4e4;
+        flex-wrap: wrap;
+    }
+
+    .setting-wrapper label {
+        margin-bottom: 15px;
     }
 </style>

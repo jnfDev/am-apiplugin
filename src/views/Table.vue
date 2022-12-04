@@ -18,34 +18,36 @@
 
 <template>
     <h1>{{ table.title }}</h1>
-    <table>
-        <thead>
-            <tr>
-                <th v-for="col in table.headers" :key="col">
-                    {{ col }}
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="row in rows" :key="row.id">
-                <td>
-                    {{row.id}}
-                </td>
-                <td>
-                    <a target="_blank" :href="row.url">{{ row.url }}</a>
-                </td>
-                <td>
-                    {{ row.title }}
-                </td>
-                <td>
-                    {{ row.pageviews }}
-                </td>
-                <td>
-                    <Date :timestamp="row.date" :humandate="humandate" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th v-for="col in table.headers" :key="col">
+                        {{ col }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="row in rows" :key="row.id">
+                    <td>
+                        {{row.id}}
+                    </td>
+                    <td>
+                        <a target="_blank" :href="row.url">{{ row.url }}</a>
+                    </td>
+                    <td>
+                        {{ row.title }}
+                    </td>
+                    <td>
+                        {{ row.pageviews }}
+                    </td>
+                    <td>
+                        <Date :timestamp="row.date" :humandate="humandate" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- TODO: Make translatable -->
     <div class="emails-list">
@@ -61,6 +63,11 @@
 
 <style scoped>
 
+    .table-wrapper {
+        overflow-x: auto;
+        max-width: 100%;
+    }
+
     .emails-list {
         padding-top: 30px;
     }
@@ -68,6 +75,10 @@
         padding-left: 15px;
         list-style: disc;
         font-size: 15px;
+    }
+
+    .emails-list ul li {
+        margin-bottom: 8px;
     }
 
     table {
