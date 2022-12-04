@@ -13,7 +13,6 @@
 }
 
 #am-api-based-app .loading {
-    cursor: progress;
     animation-name: loading;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;

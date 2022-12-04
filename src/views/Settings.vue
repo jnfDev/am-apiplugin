@@ -6,6 +6,7 @@
 
     import Error from '../components/Error.vue'
     import TextRepeater from '../components/TextRepeater.vue'
+    import Switch from '../components/Switch.vue'
 
     const settingStore = useSettingStore()
     const { numrows, emails, humandate } = storeToRefs(settingStore)
@@ -45,7 +46,10 @@
     </div>
     <div class="setting-wrapper" :class="{ loading: loading['humandate'] }">
         <label for="humandate">{{ __('Humandate') }}</label>
-        <input type="checkbox" id="humandate" :disabled="loading['humandate']" :checked="humandate" @change="(e) => onChange('humandate', e.target.checked)" >
+        
+        <Switch :disabled="loading['humandate']" :value="humandate" @onChange="(value) => onChange('humandate', value)" />
+
+        <!-- <input type="checkbox" id="humandate" :disabled="loading['humandate']" :checked="humandate" @change="(e) => onChange('humandate', e.target.checked)" > -->
     </div>
     <div class="setting-wrapper" :class="{ loading: loading['emails'] }">
         <label for="emails">{{ __('Emails') }}</label>
