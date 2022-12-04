@@ -26,8 +26,9 @@ class AdminSettings
                 },
                 'validation'   => function( $value ) {
                     if ( $value > 0 && $value <= 5 ) {
-                        return false;
+                        return;
                     }
+                    
                     return sprintf(
                         /* translators: 1: <b> 2: </b> 3: invalid numrows given */
                         esc_html__('%1$sRows Number%2$s must be a valid number between 1 and 5, %3$s given', 'am-apiplugin'),
@@ -80,8 +81,6 @@ class AdminSettings
                             );
                         }
                     }
-
-                    return true;
                 },
                 'default' => [
                     get_option('admin_email')
